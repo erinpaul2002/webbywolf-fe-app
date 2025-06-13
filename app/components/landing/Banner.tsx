@@ -1,15 +1,19 @@
 "use client";
 
 import React from 'react';
+import Image from 'next/image';
 
 export const Banner: React.FC = () => {
   return (
     <section className="bg-black text-lg text-white font-semibold mt-[150px] max-md:max-w-full max-md:mt-10">
       <div className="flex flex-col relative min-h-[652px] w-full items-center pt-11 pb-[200px] px-[70px] max-md:max-w-full max-md:pb-[100px] max-md:px-5">
-        <img
+        <Image
           src="/banner1.png"
-          className="absolute h-full w-full object-cover inset-0"
+          className="absolute object-cover"
           alt="banner background"
+          fill
+          priority
+          sizes="100vw"
         />
         <div className="relative bg-[rgba(219,219,219,1)] min-h-[60px] gap-2.5 overflow-hidden text-[32px] text-black font-extrabold whitespace-nowrap tracking-[-0.64px] px-[25px] max-md:px-5">
           LOGO

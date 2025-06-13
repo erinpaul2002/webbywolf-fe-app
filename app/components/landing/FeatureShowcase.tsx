@@ -49,7 +49,7 @@ export const FeatureShowcase = () => {
                           Loerum Ipsum
                         </span>
                         <img
-                          src="/arrow-1.svg"
+                          src="/arrow-right-1.svg"
                           className="aspect-[1.21] object-contain w-[17px] self-stretch shrink-0 my-auto"
                           alt="arrow"
                         />

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 
 interface FormData {
   name: string;
@@ -100,11 +101,12 @@ export const ContactForm: React.FC = () => {
                     <option value="1-week">1 Week</option>
                     <option value="2-weeks">2 Weeks</option>
                     <option value="1-month">1 Month</option>
-                  </select>
-                  <img
+                  </select>                  <Image
                     src="/dropdown-2.svg"
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 aspect-[1] object-contain w-6 pointer-events-none"
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none"
                     alt="dropdown"
+                    width={24}
+                    height={24}
                   />
                 </div>
               </div>
