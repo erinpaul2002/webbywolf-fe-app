@@ -199,31 +199,6 @@ export function ContentWithCardSection() {
     }
   };
 
-  // Animation variants for heading spans
-  const spanVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: {
-        duration: 0.5
-      }
-    }
-  };
-
-  // Animation variants for floating elements
-  const floatingElementVariants: Variants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: { 
-      opacity: 0.7, 
-      x: 0,
-      transition: {
-        delay: 1.2, 
-        duration: 0.8
-      }
-    }
-  };
-
   return (
     <motion.div 
       ref={sectionRef}

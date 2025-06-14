@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import { motion, AnimatePresence, Variants, useInView } from 'framer-motion';
+import { motion, Variants, useInView } from 'framer-motion'; // Removed AnimatePresence import since it's not being used
 
 interface Testimonial {
   icon: string;
@@ -205,8 +205,8 @@ export function Testimonials() {
     }
   };
   
-  // Number of visible slides at a time
-  const VISIBLE_SLIDES = 1;
+  // Number of visible slides is managed by the component layout
+  // Removed VISIBLE_SLIDES constant as it's not being used
 
   // Clone the entire testimonials array at both ends
   const extendedTestimonials = [
@@ -214,7 +214,7 @@ export function Testimonials() {
     ...testimonials, // Original
     ...testimonials, // Clone at end
   ];
-
+  
   // Start at the first card of the original set
   const [currentSlide, setCurrentSlide] = useState(testimonials.length);
   const [isTransitioning, setIsTransitioning] = useState(false);

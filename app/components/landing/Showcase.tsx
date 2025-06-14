@@ -1,7 +1,6 @@
 "use client";
 
 import Image from 'next/image';
-import { useRef } from 'react';
 
 const logos = [
   { src: "/assets/hero-logo.png", alt: "Hero" },
@@ -27,7 +26,6 @@ function getRowLogos(row: number) {
 }
 
 export function Showcase() {
-  const rowCount = 3;
   return (
     <section className="flex flex-col items-center">
       <h2 className="mt-40 self-center w-[655px] text-center text-[42px] font-bold uppercase tracking-[-0.84px] text-[rgba(34,34,34,1)] max-md:max-w-full max-md:mt-10">
@@ -37,7 +35,7 @@ export function Showcase() {
         <div className="flex flex-col gap-8">
           {[0, 1, 2].map((row) => (
             <div key={row} className="flex flex-row gap-12 justify-center">
-              {getRowLogos(row).map((logo, idx) => (
+              {getRowLogos(row).map((logo) => (
                 <div key={logo.src} className="relative w-56 h-28 flex items-center justify-center bg-white rounded-lg shadow-md">
                   <Image
                     src={logo.src}

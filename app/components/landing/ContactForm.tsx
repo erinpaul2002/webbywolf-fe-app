@@ -190,7 +190,7 @@ export function ContactForm() {
               transition={{ delay: 0.5 }}
               className="text-green-600 text-center max-w-md px-4"
             >
-              We've received your request and will get back to you shortly.
+              We have received your request and will get back to you shortly.
             </motion.p>
           </motion.div>
         ) : (

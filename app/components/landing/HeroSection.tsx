@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import { motion, useMotionValue, useSpring, useTransform, Variants, useInView, animate } from 'framer-motion';
 
 export function HeroSection() {
@@ -21,10 +21,10 @@ export function HeroSection() {
   const proximityDistance = useMotionValue(1000); // Track mouse proximity to card
   
   // Very smooth springs for all transitions
-  const springConfig = { stiffness: 90, damping: 40, mass: 1 };
+  const springConfig = useMemo(() => ({ stiffness: 90, damping: 40, mass: 1 }), []);
   const springX = useSpring(x, springConfig);
   const springY = useSpring(y, springConfig);
-  const springDistance = useSpring(distance, springConfig);
+  // Removed unused springDistance variable
   const springProximity = useSpring(proximityDistance, { stiffness: 70, damping: 50, mass: 1 });
   
   // Transform mouse position into rotation values with limited range
@@ -90,7 +90,7 @@ export function HeroSection() {
       animate(y, 0, { duration: 0.8, ...springConfig });
       animate(distance, 0, { duration: 0.8, ...springConfig });
     }
-  }, [hovering, hoverSpring, x, y, distance]);
+  }, [hovering, hoverSpring, x, y, distance, springConfig]); // Added springConfig to dependencies
 
   // Create a composite shadow effect that combines proximity and hover effects
   const cardShadow = useTransform(

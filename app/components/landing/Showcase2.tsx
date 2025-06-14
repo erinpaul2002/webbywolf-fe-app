@@ -1,6 +1,6 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useInView, Variants } from "framer-motion";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { motion, useInView, Variants } from "framer-motion";
 
 // Define proper interfaces for our types
 interface Logo {
@@ -149,7 +149,45 @@ export function Showcase() {
     }
   }, [isInView]);
 
-  // Handle the rotation animation
+  // Function to move cards - also wrapped in useCallback
+  const moveCards = useCallback(() => {
+    setIsAnimating(true);
+    
+    // Update grid state to move cards to next position
+    setTimeout(() => {
+      setGridState(prevGrid => {
+        const newGrid: GridState = {};
+        
+        // Move each card to the next position in the path
+        for (let i = 0; i < movementPath.length; i++) {
+          const currentPosition = movementPath[i];
+          const nextPosition = movementPath[(i + 1) % movementPath.length];
+          newGrid[nextPosition] = prevGrid[currentPosition];
+        }
+        
+        return newGrid;
+      });
+      
+      setIsAnimating(false);
+    }, 300);
+  }, []);
+
+  // Function to start the rotation animation - wrapped in useCallback
+  const startRotationAnimation = useCallback(() => {
+    // Clear any existing interval first
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+    
+    // Set up new interval for rotation
+    intervalRef.current = setInterval(() => {
+      if (!isAnimating) {
+        moveCards();
+      }
+    }, 2000);
+  }, [isAnimating, moveCards]); // Added moveCards to dependencies
+
+  // Handle the rotation animation - now with proper dependency
   useEffect(() => {
     // Start or stop rotation based on state
     if (rotationActive && isInView && !isPaused) {
@@ -170,45 +208,7 @@ export function Showcase() {
         intervalRef.current = null;
       }
     };
-  }, [rotationActive, isInView, isPaused]);
-
-  // Function to start the rotation animation
-  const startRotationAnimation = () => {
-    // Clear any existing interval first
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-    }
-    
-    // Set up new interval for rotation
-    intervalRef.current = setInterval(() => {
-      if (!isAnimating) {
-        moveCards();
-      }
-    }, 2000);
-  };
-
-  // Function to move cards to next position
-  const moveCards = () => {
-    setIsAnimating(true);
-    
-    // Update grid state to move cards to next position
-    setTimeout(() => {
-      setGridState(prevGrid => {
-        const newGrid: GridState = {};
-        
-        // Move each card to the next position in the path
-        for (let i = 0; i < movementPath.length; i++) {
-          const currentPosition = movementPath[i];
-          const nextPosition = movementPath[(i + 1) % movementPath.length];
-          newGrid[nextPosition] = prevGrid[currentPosition];
-        }
-        
-        return newGrid;
-      });
-      
-      setIsAnimating(false);
-    }, 300);
-  };
+  }, [rotationActive, isInView, isPaused, startRotationAnimation]);
 
   // Calculate card size and spacing based on container
   const cardWidth = 200;
@@ -290,6 +290,8 @@ export function Showcase() {
               width: containerWidth, 
               height: containerHeight,
             }}
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
           >
             {Object.entries(gridState).map(([positionStr, logo]) => {
               const position = parseInt(positionStr);

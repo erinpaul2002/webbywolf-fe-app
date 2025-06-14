@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { motion, Variants, useInView } from 'framer-motion';
 import { useRef } from 'react';
+import Image from 'next/image';
 
 // Hero component for the landing page
 export function Hero() {
@@ -122,13 +123,19 @@ export function Hero() {
                   transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
                   <span className="self-stretch my-auto">Submit</span>
-                  <motion.img
-                    src="/arrow-right-1.svg"
-                    className="aspect-[1.13] object-contain w-[17px] self-stretch shrink-0 my-auto"
-                    alt="submit"
+                  <motion.div
                     whileHover={{ x: 5 }}
                     transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                  />
+                    className="relative aspect-[1.13] w-[17px] self-stretch shrink-0 my-auto"
+                  >
+                    <Image
+                      src="/arrow-right-1.svg"
+                      alt="submit"
+                      fill
+                      sizes="17px"
+                      className="object-contain"
+                    />
+                  </motion.div>
                 </motion.button>
               </motion.form>
               <motion.div 
@@ -136,14 +143,16 @@ export function Hero() {
                 variants={itemVariants}
               >
                 <motion.div 
-                  className="bg-[rgba(21,90,218,1)] self-stretch flex min-h-[29px] flex-col overflow-hidden items-center justify-center w-[30px] h-[30px] my-auto px-2 rounded-[50px]"
+                  className="bg-[rgba(21,90,218,1)] self-stretch flex min-h-[29px] flex-col overflow-hidden items-center justify-center w-[30px] h-[30px] my-auto px-2 rounded-[50px] relative"
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 >
-                  <img
+                  <Image
                     src="/credit-card-check.svg"
-                    className="aspect-[1] "
                     alt="check"
+                    fill
+                    sizes="30px"
+                    className="object-contain"
                   />
                 </motion.div>
                 <div className="text-text-primary text-[15px] font-medium leading-loose self-stretch my-auto">
@@ -157,13 +166,20 @@ export function Hero() {
             variants={containerVariants}
           >
             <div className="flex flex-col relative min-h-[831px] w-full text-[15px] text-black font-bold pt-0 pb-[762px] px-[70px] max-md:max-w-full max-md:pb-[100px] max-md:px-5">
-              <motion.img
-                src="/Hero.png"
-                className="absolute max-h-screen w-full object-cover inset-0 top-0 left-0"
-                alt="hero background"
-                style={{ top: 0 }}
+              <motion.div
+                className="absolute w-full h-full inset-0 top-0 left-0"
                 variants={imageVariants}
-              />
+              >
+                <Image
+                  src="/Hero.png"
+                  alt="hero background"
+                  width={1000}
+                  height={900}
+                  priority
+                  sizes="(max-width: 768px) 100vw, 46vw"
+                  className="object-cover h-[100vh] w-full"
+                />
+              </motion.div>
               
               <motion.div 
                 className="absolute bottom-0 left-0 w-full h-[18%] bg-transparent" 

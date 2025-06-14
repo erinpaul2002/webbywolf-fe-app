@@ -114,17 +114,6 @@ export function FAQ() {
     }
   };
 
-  const headingSpanVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: {
-        duration: 0.5
-      }
-    }
-  };
-
   const underlineVariants: Variants = {
     hidden: { width: 0 },
     visible: { 

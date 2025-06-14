@@ -1,7 +1,7 @@
 'use client';
 
 import { CSSProperties } from 'react';
-
+import Image from 'next/image';
 
 interface AdjustableBackgroundProps {
   imagePath?: string;
@@ -37,7 +37,8 @@ export function AdjustableBackground({
   const style = {
     position,
     top,
-    left,    right,
+    left,
+    right,
     bottom,
     width,
     height,
@@ -51,10 +52,18 @@ export function AdjustableBackground({
       className={`pointer-events-none overflow-hidden ${className}`} 
       style={style}
       aria-hidden="true"
-    >      <img 
+    >
+      <Image 
         src={imagePath} 
-        alt="" 
-        className="w-full h-auto min-h-screen object-cover"
-      /></div>
+        alt=""
+        fill
+        sizes="100vw"
+        priority
+        className="object-cover"
+        style={{
+          minHeight: '100vh',
+        }}
+      />
+    </div>
   );
 }
