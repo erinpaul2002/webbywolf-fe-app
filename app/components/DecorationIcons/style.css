@@ -1,0 +1,69 @@
+.decoration-icons {
+  align-items: flex-start;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+}
+
+.decoration-icons .row {
+  height: 16px;
+  position: relative;
+  width: 176px;
+}
+
+.decoration-icons .icon-jam-icons {
+  height: 16px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 16px;
+}
+
+.decoration-icons .img {
+  height: 16px;
+  left: 32px;
+  position: absolute;
+  top: 0;
+  width: 16px;
+}
+
+.decoration-icons .icon-jam-icons-2 {
+  height: 16px;
+  left: 64px;
+  position: absolute;
+  top: 0;
+  width: 16px;
+}
+
+.decoration-icons .icon-jam-icons-3 {
+  height: 16px;
+  left: 96px;
+  position: absolute;
+  top: 0;
+  width: 16px;
+}
+
+.decoration-icons .icon-jam-icons-4 {
+  height: 16px;
+  left: 128px;
+  position: absolute;
+  top: 0;
+  width: 16px;
+}
+
+.decoration-icons .icon-jam-icons-5 {
+  height: 16px;
+  left: 160px;
+  position: absolute;
+  top: 0;
+  width: 16px;
+}
+
+.purple-icon {
+  filter: invert(24%) sepia(90%) saturate(6695%) hue-rotate(270deg) brightness(90%) contrast(110%);
+}
+
+.blue-icon {
+  filter: invert(23%) sepia(98%) saturate(3786%) hue-rotate(210deg) brightness(94%) contrast(101%);
+}

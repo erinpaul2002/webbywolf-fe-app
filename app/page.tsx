@@ -3,7 +3,7 @@ import { Hero } from './components/landing/Hero';
 import { Features } from './components/landing/Features';
 import { Services } from './components/landing/Services';
 import { Banner } from './components/landing/Banner';
-import { Showcase } from './components/landing/Showcase';
+import { Showcase } from './components/landing/Showcase2';
 import { ServiceCards } from './components/landing/ServiceCards';
 import { PromoBanner } from './components/landing/PromoBanner';
 import { ContactForm } from './components/landing/ContactForm';
@@ -13,7 +13,7 @@ import { ContentWithCardSection } from './components/landing/ContentWithCardSect
 import { Testimonials } from './components/landing/Testimonials';
 import { FAQ } from './components/landing/FAQ';
 import { Footer } from './components/landing/Footer';
-import HeroSection from './components/landing/HeroSection';
+import {HeroSection} from './components/landing/HeroSection';
 import { StorySection } from './components/landing/StorySection';
 import GallerySection from './components/landing/GallerySection';
 import { FeatureShowcase } from './components/landing/FeatureShowcase';
@@ -32,7 +32,7 @@ export default function Home() {
           <AdjustableBackground
             imagePath="/line-5.svg"
             position="absolute"
-            opacity={10}
+            opacity={1}
             top="30%"
             left="-8%"
             width="100%"

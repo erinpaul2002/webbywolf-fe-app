@@ -1,4 +1,7 @@
-import React from 'react';
+'use client';
+
+import { CSSProperties } from 'react';
+
 
 interface AdjustableBackgroundProps {
   imagePath?: string;
@@ -16,7 +19,7 @@ interface AdjustableBackgroundProps {
   className?: string;
 }
 
-export const AdjustableBackground: React.FC<AdjustableBackgroundProps> = ({
+export function AdjustableBackground({
   imagePath = '/line-6.svg',
   opacity = 0.2,
   position = 'fixed',
@@ -30,31 +33,28 @@ export const AdjustableBackground: React.FC<AdjustableBackgroundProps> = ({
   scale = 1,
   zIndex = 0,
   className = '',
-}) => {
+}: AdjustableBackgroundProps) {
   const style = {
     position,
     top,
-    left,
-    right,
+    left,    right,
     bottom,
     width,
     height,
     opacity,
     transform: `rotate(${rotate}deg) scale(${scale})`,
     zIndex,
-  } as React.CSSProperties;
+  } as CSSProperties;
 
   return (
     <div 
       className={`pointer-events-none overflow-hidden ${className}`} 
       style={style}
       aria-hidden="true"
-    >
-      <img 
+    >      <img 
         src={imagePath} 
         alt="" 
         className="w-full h-auto min-h-screen object-cover"
-      />
-    </div>
+      /></div>
   );
-};
+}
