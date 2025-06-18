@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence, Variants, useInView } from 'framer-motion';
+import { ChevronDown } from "lucide-react";
 
 interface FAQItem {
   question: string;
@@ -52,10 +53,10 @@ export function FAQ() {
       opacity: 1, 
       y: 0,
       transition: {
-        duration: 0.8,
+        duration: 0.35, // reduced from 0.8
         ease: "easeOut",
         when: "beforeChildren",
-        staggerChildren: 0.1
+        staggerChildren: 0.05 // reduced from 0.1
       }
     }
   };
@@ -68,7 +69,7 @@ export function FAQ() {
       transition: {
         type: "spring",
         stiffness: 70,
-        damping: 15
+        damping: 12 // slightly snappier
       }
     }
   };
@@ -78,8 +79,8 @@ export function FAQ() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.3
+        staggerChildren: 0.05, // reduced from 0.1
+        delayChildren: 0.12 // reduced from 0.3
       }
     }
   };
@@ -92,8 +93,8 @@ export function FAQ() {
       transition: {
         type: "spring",
         stiffness: 70,
-        damping: 15,
-        delay: 0.2 + (custom * 0.05)
+        damping: 12, // snappier
+        delay: 0.08 + (custom * 0.025) // reduced from 0.2 + (custom * 0.05)
       }
     }),
     hover: {
@@ -105,12 +106,12 @@ export function FAQ() {
     open: { 
       rotate: 180,
       scale: 1.1,
-      transition: { duration: 0.4 }
+      transition: { duration: 0.18 } // reduced from 0.4
     },
     closed: { 
       rotate: 0,
       scale: 1,
-      transition: { duration: 0.4 }
+      transition: { duration: 0.18 } // reduced from 0.4
     }
   };
 
@@ -119,8 +120,8 @@ export function FAQ() {
     visible: { 
       width: "120px",
       transition: { 
-        duration: 0.8, 
-        delay: 0.6 
+        duration: 0.28, // reduced from 0.8
+        delay: 0.18 // reduced from 0.6
       }
     }
   };
@@ -130,8 +131,8 @@ export function FAQ() {
     visible: { 
       opacity: 0.3,
       transition: {
-        duration: 1,
-        delay: 0.8
+        duration: 0.35, // reduced from 1
+        delay: 0.18 // reduced from 0.8
       }
     }
   };
@@ -155,7 +156,7 @@ export function FAQ() {
               visible: { 
                 opacity: 1, 
                 y: 0,
-                transition: { delay: 0.2, duration: 0.5 }
+                transition: { delay: 0.08, duration: 0.22 } // reduced
               }
             }}
           >
@@ -167,7 +168,7 @@ export function FAQ() {
               visible: { 
                 opacity: 1, 
                 y: 0,
-                transition: { delay: 0.4, duration: 0.5 }
+                transition: { delay: 0.16, duration: 0.22 } // reduced
               }
             }}
           >
@@ -192,89 +193,63 @@ export function FAQ() {
               key={index} 
               variants={faqItemVariants}
               custom={index}
-              whileHover="hover"
-              className="border-[rgba(17,17,17,0.2)] border-t transition-colors duration-300"
+              className="border-b border-[rgba(17,17,17,0.1)] last:border-b-0"
             >
               <motion.button
                 onClick={() => toggleFAQ(index)}
-                className="flex w-full items-center gap-[40px_76px] justify-between flex-wrap px-[41px] py-8 max-md:max-w-full max-md:px-5 text-left rounded-md"
-                initial={false}
-                whileHover={{ 
-                  backgroundColor: "rgba(248, 250, 252, 0.5)",
-                  transition: { duration: 0.2 }
-                }}
-                whileTap={{ scale: 0.995 }}
+                className="flex w-full items-center gap-[40px_76px] justify-between flex-wrap px-[41px] py-8 max-md:max-w-full max-md:px-5 text-left"
+                initial={{ backgroundColor: "transparent" }}
+                whileHover={{ backgroundColor: "#f8fafc" }}
+                animate={{ backgroundColor: "transparent" }}
               >
-                <div className="self-stretch min-w-60 w-[1015px] my-auto max-md:max-w-full">
-                  <motion.h3 
-                    className={`text-black font-semibold leading-none transition-colors duration-300 ${openIndex === index ? 'text-[rgba(25,89,172,1)]' : ''}`}
-                    animate={{
-                      color: openIndex === index ? 'rgba(25,89,172,1)' : 'rgba(0,0,0,1)'
-                    }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    {faq.question}
-                  </motion.h3>
+                <h3 className="font-bold text-base text-slate-950">
+                  {faq.question}
+                </h3>
+                
+                {/* Animated icon container */}
+                <div className="relative w-6 h-6">
                   <AnimatePresence initial={false}>
-                    {openIndex === index && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0, marginTop: 0 }}
-                        animate={{ 
-                          height: "auto", 
-                          opacity: 1,
-                          marginTop: 10,
-                          transition: {
-                            height: { 
-                              duration: 0.3,
-                              ease: "easeOut"
-                            },
-                            opacity: { 
-                              duration: 0.3,
-                              delay: 0.1 
-                            }
-                          }
-                        }}
-                        exit={{ 
-                          height: 0, 
-                          opacity: 0,
-                          marginTop: 0,
-                          transition: {
-                            height: { 
-                              duration: 0.3,
-                              ease: "easeIn" 
-                            },
-                            opacity: { 
-                              duration: 0.2 
-                            }
-                          }
-                        }}
-                        className="overflow-hidden"
+                    {openIndex === index ? (
+                      <motion.div 
+                        key="minus"
+                        initial={{ opacity: 0, rotate: -90 }}
+                        animate={{ opacity: 1, rotate: 0 }}
+                        exit={{ opacity: 0, rotate: 90 }}
+                        transition={{ duration: 0.3 }}
+                        className="absolute inset-0"
                       >
-                        <motion.p 
-                          initial={{ opacity: 0, y: 5 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.3, delay: 0.2 }}
-                          className="text-black font-normal leading-[25px] max-md:max-w-full"
-                        >
-                          {faq.answer}
-                        </motion.p>
+                        <Image src="/line.svg" alt="Collapse" width={24} height={24} />
+                      </motion.div>
+                    ) : (
+                      <motion.div
+                        key="plus"
+                        initial={{ opacity: 0, rotate: 90 }}
+                        animate={{ opacity: 1, rotate: 0 }}
+                        exit={{ opacity: 0, rotate: -90 }}
+                        transition={{ duration: 0.3 }}
+                        className="absolute inset-0"
+                      >
+                        <Image src="/plus.svg" alt="Expand" width={24} height={24} />
                       </motion.div>
                     )}
                   </AnimatePresence>
                 </div>
-                <motion.div 
-                  className="relative w-6 h-6 self-stretch shrink-0 my-auto"
-                  variants={iconVariants}
-                  animate={openIndex === index ? "open" : "closed"}
-                >
-                  <Image
-                    src={openIndex === index ? "/line.svg" : "/plus.svg"}
-                    alt={openIndex === index ? "collapse" : "expand"}
-                    fill
-                    className="object-contain"
-                  />
-                </motion.div>
               </motion.button>
+              
+              {/* Answer section */}
+              <motion.div
+                initial={false}
+                animate={{ 
+                  height: openIndex === index ? "auto" : 0,
+                  opacity: openIndex === index ? 1 : 0
+                }}
+                transition={{ duration: 0.3 }}
+                className="overflow-hidden"
+              >
+                <div className="px-[41px] pb-8 max-md:px-5">
+                  <p className="text-slate-500">{faq.answer}</p>
+                </div>
+              </motion.div>
             </motion.article>
           ))}
         </div>
@@ -288,7 +263,7 @@ export function FAQ() {
           transition: {
             y: { 
               repeat: Infinity, 
-              duration: 3, 
+              duration: 1.2, // reduced from 3
               ease: "easeInOut" 
             }
           }
@@ -312,7 +287,7 @@ export function FAQ() {
           transition: {
             y: { 
               repeat: Infinity, 
-              duration: 4, 
+              duration: 1.6, // reduced from 4
               ease: "easeInOut" 
             }
           }

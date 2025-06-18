@@ -32,17 +32,17 @@ export function Services() {
     }
   ];
 
-  // Animation variants
+  // Animation variants (reduced delays/durations)
   const sectionVariants: Variants = {
     hidden: { opacity: 0, y: 50 },
     visible: { 
       opacity: 1, 
       y: 0,
       transition: {
-        duration: 0.8,
+        duration: 0.3, // reduced from 0.8
         ease: "easeOut",
-        when: "beforeChildren", // Ensure parent animates before children
-        staggerChildren: 0.1 // Stagger children animations
+        when: "beforeChildren",
+        staggerChildren: 0.05 // reduced from 0.1
       }
     }
   };
@@ -56,7 +56,7 @@ export function Services() {
         type: "spring" as const,
         stiffness: 70,
         damping: 15,
-        delay: 0.2
+        delay: 0.08 // reduced from 0.2
       }
     }
   };
@@ -66,8 +66,8 @@ export function Services() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.4
+        staggerChildren: 0.07, // reduced from 0.2
+        delayChildren: 0.08 // reduced from 0.4
       }
     }
   };
@@ -81,7 +81,7 @@ export function Services() {
         type: "spring" as const,
         stiffness: 100,
         damping: 15,
-        delay: 0.2 * custom
+        delay: 0.07 * custom // reduced from 0.2 * custom
       }
     })
   };
@@ -95,7 +95,7 @@ export function Services() {
         type: "spring" as const,
         stiffness: 50,
         damping: 15,
-        delay: 0.3
+        delay: 0.08 // reduced from 0.3
       }
     }
   };
@@ -105,9 +105,9 @@ export function Services() {
     visible: { 
       width: "95%",
       transition: {
-        duration: 1.2,
+        duration: 0.4, // reduced from 1.2
         ease: "easeOut",
-        delay: 0.8
+        delay: 0.12 // reduced from 0.8
       }
     }
   };
@@ -119,8 +119,8 @@ export function Services() {
       opacity: 0.05, 
       scale: 1,
       transition: {
-        duration: 0.8,
-        delay: 0.7
+        duration: 0.2, // reduced from 0.8
+        delay: 0.12 // reduced from 0.7
       }
     }
   };
@@ -131,7 +131,7 @@ export function Services() {
       variants={sectionVariants}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
-      className="relative flex flex-col items-stretch w-full mt-[93px] pl-20 pt-[60px] bg-white max-md:max-w-full max-md:mt-10 max-md:pl-5 overflow-hidden"
+      className="relative flex flex-col items-stretch w-full mt-[93px] px-4 sm:px-6 md:px-10 lg:pl-20 pt-[60px] bg-white max-md:mt-10 overflow-hidden"
     >
       {/* Decorative elements with continuous animations when in view */}
       <motion.div
@@ -146,7 +146,7 @@ export function Services() {
             }
           }
         } : {}}
-        className="absolute top-40 right-20 w-48 h-48 rounded-full bg-blue-100 opacity-5 blur-xl -z-10"
+        className="absolute top-40 right-5 sm:right-20 w-24 sm:w-48 h-24 sm:h-48 rounded-full bg-blue-100 opacity-5 blur-xl -z-10"
       />
       
       <motion.div
@@ -162,24 +162,24 @@ export function Services() {
             }
           }
         } : {}}
-        className="absolute bottom-20 left-40 w-36 h-36 rounded-full bg-green-100 opacity-5 blur-xl -z-10"
+        className="absolute bottom-20 left-5 sm:left-40 w-20 sm:w-36 h-20 sm:h-36 rounded-full bg-green-100 opacity-5 blur-xl -z-10"
       />
 
-      <div className="max-md:max-w-full">
-        <div className="flex gap-5 max-md:flex-col max-md:items-stretch">
-          <div className="w-[57%] max-md:w-full max-md:ml-0">
-            <div className="grow max-md:max-w-full max-md:mt-[21px]">
+      <div className="w-full">
+        <div className="flex flex-col md:flex-row md:gap-5">
+          <div className="w-full md:w-[57%]">
+            <div className="grow w-full">
               <motion.div 
-                className="min-h-[342px] mr-6 pl-5 pr-10 pt-10 pb-[11px] max-md:max-w-full max-md:mr-2.5 max-md:pr-5"
+                className="min-h-[250px] md:min-h-[342px] py-5 md:py-10 px-2 md:px-5 md:pr-10"
               >
                 <motion.h2 
-                  className="text-2xl font-semibold tracking-[-0.96px] text-[rgba(5,70,210,1)] max-md:max-w-full"
+                  className="text-xl md:text-2xl font-semibold tracking-[-0.96px] text-[rgba(5,70,210,1)]"
                   variants={headingVariants}
                 >
                   Lorem ipsum dolor sit amet
                 </motion.h2>
                 <motion.h3 
-                  className="mt-5 text-[42px] font-bold uppercase tracking-[-0.84px] text-[rgba(34,34,34,1)] max-md:max-w-full"
+                  className="mt-4 md:mt-5 text-3xl md:text-[42px] font-bold uppercase tracking-[-0.84px] text-[rgba(34,34,34,1)]"
                   variants={headingVariants}
                 >
                   <motion.span
@@ -208,7 +208,7 @@ export function Services() {
                   </motion.span>
                 </motion.h3>
                 <motion.p 
-                  className="mt-5 text-lg font-normal leading-[25px] text-black max-md:max-w-full"
+                  className="mt-4 md:mt-5 text-base md:text-lg font-normal leading-[25px] text-black"
                   variants={headingVariants}
                 >
                   Lorem ipsum dolor sit amet consectetur. Mauris ullamcorper
@@ -218,13 +218,13 @@ export function Services() {
                 </motion.p>
               </motion.div>
               <motion.div 
-                className="w-full pl-5 pr-10 py-10 max-md:max-w-full max-md:pr-5"
+                className="w-full px-2 md:px-5 md:pr-10 py-5 md:py-10"
                 variants={serviceListVariants}
               >
                 {servicePoints.map((point, index) => (
                   <motion.article 
                     key={index} 
-                    className="flex w-full flex-wrap gap-4 mt-10 first:mt-0 max-md:max-w-full"
+                    className="flex w-full flex-wrap gap-3 md:gap-4 mt-8 md:mt-10 first:mt-0"
                     variants={serviceItemVariants}
                     custom={index}
                     whileHover={{ 
@@ -246,7 +246,7 @@ export function Services() {
                     } : {}}
                   >
                     <motion.div 
-                      className="relative w-9 aspect-[0.95] shrink-0"
+                      className="relative w-7 md:w-9 aspect-[0.95] shrink-0"
                       whileHover={{ rotate: [0, -10, 10, -5, 0], scale: 1.1 }}
                       transition={{ duration: 0.5 }}
                       animate={isInView ? {
@@ -268,9 +268,9 @@ export function Services() {
                         alt="check icon"
                       />
                     </motion.div>
-                    <div className="flex-1 min-w-60 shrink basis-[0%] max-md:max-w-full">
+                    <div className="flex-1 min-w-0 md:min-w-60 shrink basis-[0%]">
                       <motion.h4 
-                        className="text-xl font-semibold tracking-[-0.4px] text-[#222] max-md:max-w-full"
+                        className="text-lg md:text-xl font-semibold tracking-[-0.4px] text-[#222]"
                         variants={{
                           hidden: { opacity: 0, y: 10 },
                           visible: { 
@@ -288,7 +288,7 @@ export function Services() {
                         {point.text}
                       </motion.h4>
                       <motion.p 
-                        className="mt-[9px] text-lg font-normal leading-[25px] text-black max-md:max-w-full"
+                        className="mt-2 md:mt-[9px] text-base md:text-lg font-normal leading-[25px] text-black"
                         variants={{
                           hidden: { opacity: 0 },
                           visible: { 
@@ -308,9 +308,9 @@ export function Services() {
               </motion.div>
             </div>
           </div>
-          <div className="w-[43%] ml-5 max-md:w-full max-md:ml-0">
+          <div className="w-full md:w-[43%] mt-10 md:mt-0 md:ml-5">
             <motion.div 
-              className="relative w-full aspect-[0.93] self-stretch my-auto max-md:max-w-full max-md:mt-10"
+              className="relative w-full max-w-md mx-auto md:mx-0 aspect-[0.93]"
               variants={illustrationVariants}
               whileHover={{ 
                 scale: 1.03,
@@ -341,7 +341,7 @@ export function Services() {
                   visible: { 
                     opacity: 0.2, 
                     scale: 1,
-                    transition: { delay: 1, duration: 0.8 }
+                    transition: { delay: 0.15, duration: 0.2 } // reduced
                   }
                 }}
                 animate={isInView ? {
@@ -361,7 +361,7 @@ export function Services() {
                     }
                   }
                 } : {}}
-                className="absolute top-[20%] right-[10%] w-6 h-6 rounded-full bg-blue-300 opacity-40 blur-sm"
+                className="absolute top-[20%] right-[10%] w-4 sm:w-6 h-4 sm:h-6 rounded-full bg-blue-300 opacity-40 blur-sm"
               />
               
               <motion.div
@@ -370,7 +370,7 @@ export function Services() {
                   visible: { 
                     opacity: 0.15, 
                     scale: 1,
-                    transition: { delay: 1.2, duration: 0.8 }
+                    transition: { delay: 0.18, duration: 0.2 } // reduced
                   }
                 }}
                 animate={isInView ? {
@@ -390,17 +390,17 @@ export function Services() {
                     }
                   }
                 } : {}}
-                className="absolute bottom-[25%] left-[15%] w-4 h-4 rounded-full bg-green-300 opacity-40 blur-sm"
+                className="absolute bottom-[25%] left-[15%] w-3 sm:w-4 h-3 sm:h-4 rounded-full bg-green-300 opacity-40 blur-sm"
               />
             </motion.div>
           </div>
         </div>
       </div>
-      <div className="flex w-[1312px] h-5 mt-10 shrink-0 max-w-full" />
+      <div className="flex w-full h-5 mt-10" />
       
       {/* Gradient bar with specific color stops - positioned at extreme right */}
       <motion.div 
-        className="absolute bottom-0 right-0 h-4" 
+        className="absolute bottom-0 right-0 h-3 md:h-4" 
         style={{
           background: 'linear-gradient(to right, #043898 0%, #079902 50%, #170041 100%)'
         }}
@@ -415,8 +415,8 @@ export function Services() {
             opacity: 0.05, 
             width: "50%",
             transition: {
-              width: { delay: 1.5, duration: 1 },
-              opacity: { delay: 1.5, duration: 0.8 }
+              width: { delay: 0.2, duration: 0.2 }, // reduced
+              opacity: { delay: 0.2, duration: 0.2 } // reduced
             }
           }
         }}

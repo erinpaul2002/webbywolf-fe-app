@@ -12,9 +12,9 @@ interface FeatureItem {
 export function Features() {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { 
-    once: false, // Allow animation to repeat
-    amount: 0.3, // Trigger when 30% of component is visible
-    margin: "0px 0px -50px 0px" // Start animation slightly before component comes into view
+    once: false,
+    amount: 0.3,
+    margin: "0px 0px -50px 0px"
   });
   
   const features: FeatureItem[] = [
@@ -32,17 +32,17 @@ export function Features() {
     }
   ];
 
-  // Animation variants
+  // Animation variants (reduced delays/durations)
   const sectionVariants: Variants = {
     hidden: { opacity: 0, y: 50 },
     visible: { 
       opacity: 1, 
       y: 0,
       transition: {
-        duration: 0.8,
+        duration: 0.3, // reduced from 0.8
         ease: "easeOut",
         when: "beforeChildren",
-        staggerChildren: 0.1
+        staggerChildren: 0.05 // reduced from 0.1
       }
     }
   };
@@ -53,7 +53,7 @@ export function Features() {
       opacity: 1, 
       y: 0,
       transition: {
-        duration: 0.6,
+        duration: 0.2, // reduced from 0.6
         ease: "easeOut"
       }
     }
@@ -64,8 +64,8 @@ export function Features() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3
+        staggerChildren: 0.07, // reduced from 0.2
+        delayChildren: 0.08 // reduced from 0.3
       }
     }
   };
@@ -89,9 +89,9 @@ export function Features() {
       opacity: 1, 
       scale: 1,
       transition: {
-        duration: 0.8,
+        duration: 0.3, // reduced from 0.8
         ease: "easeOut",
-        delay: 0.3
+        delay: 0.08 // reduced from 0.3
       }
     }
   };
@@ -101,9 +101,9 @@ export function Features() {
     visible: { 
       width: "95%",
       transition: {
-        duration: 1.2,
+        duration: 0.4, // reduced from 1.2
         ease: "easeOut",
-        delay: 0.5
+        delay: 0.1 // reduced from 0.5
       }
     }
   };
@@ -114,9 +114,9 @@ export function Features() {
       opacity: 1, 
       y: 0,
       transition: {
-        duration: 0.6,
+        duration: 0.2, // reduced from 0.6
         ease: "easeOut",
-        delay: 0.7
+        delay: 0.12 // reduced from 0.7
       }
     }
   };
@@ -127,30 +127,30 @@ export function Features() {
       variants={sectionVariants}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
-      className="relative flex flex-col items-stretch w-[90%] mx-auto mt-[162px] pt-10 pb-5 px-[39px] overflow-hidden border border-solid border-neutral-300 shadow-[0px_8px_30px_0px_rgba(0,0,0,0.25)] bg-[rgba(255,255,255,0.60)] max-md:max-w-full max-md:mt-10 max-md:px-5"
+      className="relative flex flex-col items-stretch w-[95%] sm:w-[90%] mx-auto mt-16 sm:mt-[162px] pt-6 sm:pt-10 pb-5 px-4 sm:px-[39px] overflow-hidden border border-solid border-neutral-300 shadow-[0px_8px_30px_0px_rgba(0,0,0,0.25)] bg-[rgba(255,255,255,0.60)]"
     >
-      <div className="max-md:max-w-full">
-        <div className="flex gap-5 max-md:flex-col max-md:items-stretch">
-          <div className="w-6/12 max-md:w-full max-md:ml-0">
-            <div className="max-md:max-w-full max-md:mt-[33px]">
+      <div className="w-full">
+        <div className="flex flex-col md:flex-row gap-5">
+          <div className="w-full md:w-6/12">
+            <div className="w-full mt-4 sm:mt-0">
               <motion.div 
-                className="max-md:max-w-full"
+                className="w-full"
                 variants={textVariants}
               >
                 <motion.h2 
-                  className="subheading-lg max-md:max-w-full"
+                  className="subheading-lg text-xl sm:text-2xl w-full"
                   variants={textVariants}
                 >
                   Lorem ipsum dolor sit
                 </motion.h2>
                 <motion.h3 
-                  className="heading uppercase mt-5"
+                  className="heading uppercase mt-3 sm:mt-5 text-2xl sm:text-3xl"
                   variants={textVariants}
                 >
                   Lorem ipsum dolor sit amet
                 </motion.h3>
                 <motion.p 
-                  className="mt-5 text-lg font-normal leading-[25px] text-text-primary max-md:max-w-full"
+                  className="mt-3 sm:mt-5 text-base sm:text-lg font-normal leading-[25px] text-text-primary"
                   variants={textVariants}
                 >
                   Lorem ipsum dolor sit amet consectetur. Amet sodales
@@ -160,13 +160,13 @@ export function Features() {
                 </motion.p>
               </motion.div>
               <motion.div 
-                className="w-full mt-[50px] max-md:max-w-full max-md:mt-10"
+                className="w-full mt-8 sm:mt-[50px]"
                 variants={featureListVariants}
               >
                 {features.map((feature, index) => (
                   <motion.article 
                     key={index} 
-                    className="w-full mt-6 pr-[49px] overflow-hidden bg-white first:mt-0 max-md:max-w-full max-md:pr-5 rounded-lg"
+                    className="w-full mt-4 sm:mt-6 px-3 sm:pr-[49px] py-3 overflow-hidden bg-white first:mt-0 rounded-lg"
                     variants={featureItemVariants}
                     whileHover={{ 
                       boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
@@ -175,10 +175,10 @@ export function Features() {
                     }}
                     transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   >
-                    <div className="flex gap-5 max-md:flex-col max-md:items-stretch p-4">
-                      <div className="w-[27%] max-md:w-full max-md:ml-0">
+                    <div className="flex flex-col sm:flex-row gap-3 sm:gap-5 p-2 sm:p-4">
+                      <div className="w-full sm:w-[27%] flex justify-center sm:justify-start">
                         <motion.div 
-                          className="relative w-[139px] aspect-[0.99] max-w-full grow shrink-0 max-md:mt-[30px]"
+                          className="relative w-[100px] sm:w-[139px] aspect-[0.99]"
                           whileHover={{ scale: 1.05 }}
                           transition={{ type: "spring", stiffness: 300, damping: 10 }}
                         >
@@ -190,8 +190,8 @@ export function Features() {
                           />
                         </motion.div>
                       </div>
-                      <div className="w-[73%] ml-5 max-md:w-full max-md:ml-0">
-                        <p className="my-auto text-lg font-normal leading-[25px] text-black self-stretch max-md:mt-10">
+                      <div className="w-full sm:w-[73%]">
+                        <p className="text-center sm:text-left text-base sm:text-lg font-normal leading-[25px] text-black">
                           {feature.text}
                         </p>
                       </div>
@@ -201,9 +201,9 @@ export function Features() {
               </motion.div>
             </div>
           </div>
-          <div className="w-6/12 ml-5 max-md:w-full max-md:ml-0">
+          <div className="w-full md:w-6/12 mt-8 md:mt-0">
             <motion.div 
-              className="relative w-full mt-5 aspect-[0.78] max-md:max-w-full max-md:mt-10"
+              className="relative w-full aspect-[0.78] max-h-[550px]"
               variants={illustrationVariants}
               animate={isInView ? {
                 y: [0, -10, 0],
@@ -223,14 +223,14 @@ export function Features() {
                 alt="Features illustration"
               />
               
-              {/* Decorative floating elements around the illustration */}
+              {/* Decorative floating elements */}
               <motion.div
                 variants={{
                   hidden: { opacity: 0, scale: 0 },
                   visible: { 
                     opacity: 0.6, 
                     scale: 1,
-                    transition: { delay: 0.8, duration: 0.5 }
+                    transition: { delay: 0.15, duration: 0.2 } // reduced
                   }
                 }}
                 animate={isInView ? {
@@ -243,7 +243,7 @@ export function Features() {
                     }
                   }
                 } : {}}
-                className="absolute top-[10%] right-[10%] w-8 h-8 rounded-full bg-blue-200"
+                className="absolute top-[10%] right-[10%] w-6 sm:w-8 h-6 sm:h-8 rounded-full bg-blue-200"
               />
               
               <motion.div
@@ -252,7 +252,7 @@ export function Features() {
                   visible: { 
                     opacity: 0.4, 
                     scale: 1,
-                    transition: { delay: 1.0, duration: 0.5 }
+                    transition: { delay: 0.18, duration: 0.2 } // reduced
                   }
                 }}
                 animate={isInView ? {
@@ -266,7 +266,7 @@ export function Features() {
                     }
                   }
                 } : {}}
-                className="absolute bottom-[20%] left-[5%] w-6 h-6 rounded-full bg-green-200"
+                className="absolute bottom-[20%] left-[5%] w-4 sm:w-6 h-4 sm:h-6 rounded-full bg-green-200"
               />
             </motion.div>
           </div>
@@ -274,11 +274,11 @@ export function Features() {
       </div>
       
       <motion.div 
-        className="flex items-center gap-5 mt-5 mb-16 text-[15px]"
+        className="flex flex-col sm:flex-row items-center gap-4 sm:gap-5 mt-8 sm:mt-5 mb-12 sm:mb-16 text-[15px]"
         variants={buttonContainerVariants}
       >
         <motion.button 
-          className="flex items-center justify-center self-stretch gap-2.5 my-auto min-h-[38px] pl-6 pr-[23px] py-2.5 overflow-hidden rounded-[5px] btn-primary shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)] max-md:px-5"
+          className="flex items-center justify-center w-full sm:w-auto gap-2.5 min-h-[38px] px-4 sm:pl-6 sm:pr-[23px] py-2.5 overflow-hidden rounded-[5px] btn-primary shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)]"
           whileHover={{ 
             scale: 1.05,
             boxShadow: "0px 6px 25px rgba(0, 0, 0, 0.3)"
@@ -301,7 +301,7 @@ export function Features() {
           </motion.div>
         </motion.button>
         <motion.div 
-          className="flex items-center self-stretch gap-2 my-auto whitespace-nowrap link-secondary"
+          className="flex items-center justify-center w-full sm:w-auto gap-2 my-auto whitespace-nowrap link-secondary"
           whileHover={{ 
             scale: 1.05,
             color: "#1959AC"
@@ -326,7 +326,7 @@ export function Features() {
       
       {/* Gradient bar with specific color stops */}
       <motion.div 
-        className="absolute bottom-0 left-0 h-4" 
+        className="absolute bottom-0 left-0 h-3 sm:h-4" 
         style={{
           background: 'linear-gradient(to right, #043898 0%, #079902 50%, #170041 100%)'
         }}

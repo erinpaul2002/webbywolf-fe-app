@@ -13,9 +13,9 @@ interface FooterLinks {
 export function Footer() {
   const footerRef = useRef(null);
   const isInView = useInView(footerRef, { 
-    once: false, // Allow animation to repeat
-    amount: 0.1, // Trigger when 10% of component is visible
-    margin: "0px 0px -50px 0px" // Start animation slightly before component comes into view
+    once: false, 
+    amount: 0.1, 
+    margin: "0px 0px -50px 0px" 
   });
 
   const footerLinks: FooterLinks = {
@@ -157,9 +157,9 @@ export function Footer() {
       variants={footerVariants}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
-      className="bg-[rgba(23,30,43,1)] w-full overflow-hidden mt-[234px] pt-10 pb-[213px] px-20 max-md:max-w-full max-md:mt-10 max-md:pb-[100px] max-md:px-5 relative"
+      className="bg-[rgba(23,30,43,1)] w-full overflow-hidden mt-[234px] pt-10 pb-[213px] px-5 sm:px-10 lg:px-20 max-md:mt-10 max-md:pb-[100px] relative"
     >
-      {/* Decorative elements with continuous floating when in view */}
+      {/* Decorative elements with better mobile positioning */}
       <motion.div
         variants={decorationVariants}
         animate={isInView ? {
@@ -172,7 +172,7 @@ export function Footer() {
             }
           }
         } : {}}
-        className="absolute top-40 right-20 w-64 h-64 rounded-full bg-blue-400 opacity-5 blur-xl"
+        className="absolute top-40 right-5 sm:right-20 w-32 sm:w-64 h-32 sm:h-64 rounded-full bg-blue-400 opacity-5 blur-xl"
       />
       <motion.div
         variants={decorationVariants}
@@ -187,16 +187,16 @@ export function Footer() {
             }
           }
         } : {}}
-        className="absolute bottom-60 left-20 w-48 h-48 rounded-full bg-blue-300 opacity-5 blur-xl"
+        className="absolute bottom-60 left-5 sm:left-20 w-24 sm:w-48 h-24 sm:h-48 rounded-full bg-blue-300 opacity-5 blur-xl"
       />
 
-      <div className="gap-5 flex max-md:flex-col max-md:items-stretch">
-        <div className="w-6/12 max-md:w-full max-md:ml-0">
+      <div className="gap-5 flex flex-col lg:flex-row">
+        <div className="w-full lg:w-6/12">
           <motion.div 
             variants={logoContainerVariants}
-            className="flex w-full flex-col max-md:max-w-full max-md:mt-10"
+            className="flex w-full flex-col"
           >
-            <div className="flex w-[424px] max-w-full items-start gap-5 justify-between">
+            <div className="flex flex-col sm:flex-row w-full max-w-full sm:max-w-[424px] items-start gap-5 justify-between">
               <motion.div 
                 variants={logoVariants}
                 whileHover={{ 
@@ -205,20 +205,20 @@ export function Footer() {
                 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                className="bg-[rgba(219,219,219,1)] min-h-[60px] gap-2.5 overflow-hidden text-[32px] text-black font-extrabold whitespace-nowrap tracking-[-0.64px] px-[25px] max-md:px-5 cursor-pointer"
+                className="bg-[rgba(219,219,219,1)] min-h-[60px] gap-2.5 overflow-hidden text-[32px] text-black font-extrabold whitespace-nowrap tracking-[-0.64px] px-[25px] cursor-pointer"
               >
                 LOGO
               </motion.div>
               <motion.div 
                 variants={titleVariants}
-                className="text-white text-xl font-bold leading-none tracking-[-0.8px] mt-[58px] max-md:mt-10"
+                className="text-white text-xl font-bold leading-none tracking-[-0.8px] mt-4 sm:mt-[58px]"
               >
                 Lorem Ipsum
               </motion.div>
             </div>
             <motion.nav 
               variants={linkColumnVariants}
-              className="text-lg text-white font-normal tracking-[-0.72px] leading-none mt-12 max-md:mt-10"
+              className="text-lg text-white font-normal tracking-[-0.72px] leading-none mt-8 sm:mt-12"
             >
               {footerLinks.column1.map((link, index) => (
                 <motion.div 
@@ -226,7 +226,7 @@ export function Footer() {
                   variants={linkItemVariants}
                   custom={index}
                   whileHover="hover"
-                  className={index > 0 ? "mt-6" : ""}
+                  className={index > 0 ? "mt-4 sm:mt-6" : ""}
                 >
                   <motion.a 
                     href="#" 
@@ -242,12 +242,12 @@ export function Footer() {
             </motion.nav>
           </motion.div>
         </div>
-        <div className="w-6/12 ml-5 max-md:w-full max-md:ml-0">
+        <div className="w-full lg:w-6/12">
           <motion.div 
             variants={logoContainerVariants}
-            className="w-full mt-[58px] max-md:max-w-full max-md:mt-10"
+            className="w-full mt-8 lg:mt-[58px]"
           >
-            <div className="flex items-stretch gap-[40px_86px] text-xl text-white font-bold tracking-[-0.8px] leading-none flex-wrap max-md:max-w-full">
+            <div className="flex items-stretch gap-5 sm:gap-[40px_86px] text-xl text-white font-bold tracking-[-0.8px] leading-none flex-wrap">
               {["Lorem Ipsum", "Lorem Ipsum", "Lorem Ipsum"].map((title, index) => (
                 <motion.div 
                   key={index}
@@ -259,18 +259,18 @@ export function Footer() {
                     textShadow: "0px 0px 8px rgba(128, 176, 237, 0.6)"
                   }}
                   transition={{ type: "spring", stiffness: 300, damping: 10 }}
-                  className="grow shrink w-[90px] cursor-pointer"
+                  className="cursor-pointer"
                 >
                   {title}
                 </motion.div>
               ))}
             </div>
-            <div className="w-full mt-12 max-md:max-w-full max-md:mr-2.5 max-md:mt-10">
-              <div className="gap-5 flex max-md:flex-col max-md:items-stretch">
-                <div className="w-[39%] max-md:w-full max-md:ml-0">
+            <div className="w-full mt-8 sm:mt-12">
+              <div className="gap-5 flex flex-col sm:flex-row">
+                <div className="w-full sm:w-[39%]">
                   <motion.nav 
                     variants={linkColumnVariants}
-                    className="grow text-lg text-white font-normal tracking-[-0.72px] leading-none max-md:mt-8"
+                    className="text-lg text-white font-normal tracking-[-0.72px] leading-none"
                   >
                     {footerLinks.column2.map((link, index) => (
                       <motion.div 
@@ -278,7 +278,7 @@ export function Footer() {
                         variants={linkItemVariants}
                         custom={index}
                         whileHover="hover"
-                        className={index > 0 ? "mt-6" : ""}
+                        className={index > 0 ? "mt-4 sm:mt-6" : ""}
                       >
                         <motion.a 
                           href="#" 
@@ -293,16 +293,16 @@ export function Footer() {
                     ))}
                   </motion.nav>
                 </div>
-                <div className="w-[61%] ml-5 max-md:w-full max-md:ml-0">
-                  <div className="flex items-stretch gap-[7px] text-lg text-white font-normal tracking-[-0.72px] leading-none max-md:mt-8">
-                    <motion.div variants={linkColumnVariants}>
+                <div className="w-full sm:w-[61%]">
+                  <div className="flex flex-wrap sm:flex-nowrap gap-8 sm:gap-[7px] text-lg text-white font-normal tracking-[-0.72px] leading-none">
+                    <motion.div variants={linkColumnVariants} className="mr-8 sm:mr-0">
                       {footerLinks.column3.map((link, index) => (
                         <motion.div 
                           key={index} 
                           variants={linkItemVariants}
                           custom={index}
                           whileHover="hover"
-                          className={index > 0 ? "mt-6" : ""}
+                          className={index > 0 ? "mt-4 sm:mt-6" : ""}
                         >
                           <motion.a 
                             href="#" 
@@ -344,10 +344,10 @@ export function Footer() {
       {/* Enhanced animated footer line */}
       <motion.div
         variants={lineVariants}
-        className="absolute bottom-20 left-0 h-[1px] bg-gradient-to-r from-transparent via-blue-400 to-transparent opacity-30"
+        className="absolute bottom-10 sm:bottom-20 left-0 h-[1px] bg-gradient-to-r from-transparent via-blue-400 to-transparent opacity-30"
       />
       
-      {/* Additional subtle decorative elements */}
+      {/* Additional subtle decorative elements with improved mobile positioning */}
       <motion.div
         variants={{
           hidden: { opacity: 0 },
@@ -366,7 +366,7 @@ export function Footer() {
             }
           }
         } : {}}
-        className="absolute top-20 left-1/2 transform -translate-x-1/2 w-32 h-32 rounded-full bg-blue-200 blur-2xl"
+        className="absolute top-20 left-1/2 transform -translate-x-1/2 w-20 sm:w-32 h-20 sm:h-32 rounded-full bg-blue-200 blur-2xl"
       />
     </motion.footer>
   );

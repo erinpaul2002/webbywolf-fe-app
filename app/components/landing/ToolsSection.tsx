@@ -24,10 +24,10 @@ export function ToolsSection() {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.8,
+        duration: 0.32, // reduced from 0.8
         ease: "easeOut",
         when: "beforeChildren",
-        staggerChildren: 0.1,
+        staggerChildren: 0.05, // reduced from 0.1
       },
     },
   };
@@ -40,7 +40,7 @@ export function ToolsSection() {
       transition: {
         type: "spring",
         stiffness: 70,
-        damping: 15,
+        damping: 12, // snappier
       },
     },
   };
@@ -50,8 +50,8 @@ export function ToolsSection() {
     visible: {
       opacity: 1,
       transition: {
-        delayChildren: 0.3,
-        staggerChildren: 0.1,
+        delayChildren: 0.12, // reduced from 0.3
+        staggerChildren: 0.05, // reduced from 0.1
       },
     },
   };
@@ -64,7 +64,7 @@ export function ToolsSection() {
       transition: {
         type: "spring",
         stiffness: 100,
-        damping: 15,
+        damping: 12, // snappier
       },
     },
     hover: {
@@ -73,7 +73,7 @@ export function ToolsSection() {
       transition: {
         type: "spring",
         stiffness: 400,
-        damping: 10,
+        damping: 8, // snappier
       },
     },
     tap: { scale: 0.98 },
@@ -87,8 +87,8 @@ export function ToolsSection() {
       transition: {
         type: "spring",
         stiffness: 70,
-        damping: 15,
-        delay: 0.5,
+        damping: 12, // snappier
+        delay: 0.08, // reduced from 0.5
       },
     },
   };
@@ -101,8 +101,8 @@ export function ToolsSection() {
       transition: {
         type: "spring",
         stiffness: 100,
-        damping: 15,
-        delay: 0.6,
+        damping: 12, // snappier
+        delay: 0.13, // reduced from 0.6
       },
     },
     hover: {
@@ -111,7 +111,7 @@ export function ToolsSection() {
       transition: {
         type: "spring",
         stiffness: 400,
-        damping: 10,
+        damping: 8, // snappier
       },
     },
   };
@@ -122,7 +122,7 @@ export function ToolsSection() {
       transition: {
         type: "spring",
         stiffness: 300,
-        damping: 10,
+        damping: 8, // snappier
       },
     },
   };
@@ -136,15 +136,15 @@ export function ToolsSection() {
       transition: {
         type: "spring",
         stiffness: 50,
-        damping: 15,
-        delay: 0.4,
+        damping: 12, // snappier
+        delay: 0.09, // reduced from 0.4
       },
     },
     floating: {
       y: [0, -15, 0],
       transition: {
         repeat: Infinity,
-        duration: 5,
+        duration: 1.8, // reduced from 5
         ease: "easeInOut",
       },
     },
@@ -157,8 +157,8 @@ export function ToolsSection() {
       opacity: 0.1,
       scale: 1,
       transition: {
-        duration: 0.8,
-        delay: 0.7,
+        duration: 0.28, // reduced from 0.8
+        delay: 0.18, // reduced from 0.7
       },
     },
   };
@@ -169,9 +169,9 @@ export function ToolsSection() {
     visible: {
       width: "60%",
       transition: {
-        duration: 1.2,
+        duration: 0.32, // reduced from 1.2
         ease: "easeOut",
-        delay: 0.8,
+        delay: 0.18, // reduced from 0.8
       },
     },
   };
@@ -259,8 +259,8 @@ export function ToolsSection() {
                 opacity: 0.05,
                 width: "40%",
                 transition: {
-                  width: { delay: 1, duration: 1 },
-                  opacity: { delay: 1, duration: 0.8 },
+                  width: { delay: 0.18, duration: 0.22 }, // reduced from 1, 1
+                  opacity: { delay: 0.18, duration: 0.18 }, // reduced from 1, 0.8
                 },
               }
             : { opacity: 0, width: 0 }
@@ -276,8 +276,8 @@ export function ToolsSection() {
                 opacity: 0.05,
                 width: "30%",
                 transition: {
-                  width: { delay: 1.2, duration: 1 },
-                  opacity: { delay: 1.2, duration: 0.8 },
+                  width: { delay: 0.22, duration: 0.22 }, // reduced from 1.2, 1
+                  opacity: { delay: 0.22, duration: 0.18 }, // reduced from 1.2, 0.8
                 },
               }
             : { opacity: 0, width: 0 }
@@ -299,7 +299,7 @@ export function ToolsSection() {
                     ? { opacity: 1, y: 0 }
                     : { opacity: 0, y: 20 }
                 }
-                transition={{ delay: 0.2, duration: 0.5 }}
+                transition={{ delay: 0.07, duration: 0.22 }} // reduced from 0.2, 0.5
               >
                 Lorem ipsum{" "}
               </motion.span>
@@ -310,7 +310,7 @@ export function ToolsSection() {
                     ? { opacity: 1, y: 0 }
                     : { opacity: 0, y: 20 }
                 }
-                transition={{ delay: 0.4, duration: 0.5 }}
+                transition={{ delay: 0.13, duration: 0.22 }} // reduced from 0.4, 0.5
               >
                 dolor sit amet
               </motion.span>
@@ -334,9 +334,8 @@ export function ToolsSection() {
                         transition: {
                           y: {
                             repeat: Infinity,
-                            duration: 3 + index,
-                            ease: "easeInOut",
-                            delay: index * 0.3,
+                            duration: 0.8, // reduced from 2
+                            delay: 0.16, // reduced from 0.3
                           },
                         },
                       }
@@ -362,7 +361,8 @@ export function ToolsSection() {
                     transition: {
                       scale: {
                         repeat: activeTab === tab ? Infinity : 0,
-                        duration: 2,
+                        duration: 0.8, // reduced from 2
+                        delay: 0.16, // reduced from 0.3
                         ease: "easeInOut",
                       },
                     },
@@ -394,9 +394,9 @@ export function ToolsSection() {
                       transition: {
                         x: {
                           repeat: Infinity,
-                          duration: 3,
+                          duration: 0.8, // reduced from 2
+                          delay: 0.16, // reduced from 0.3
                           ease: "easeInOut",
-                          delay: 1.5,
                         },
                       },
                     }
@@ -416,9 +416,9 @@ export function ToolsSection() {
                           transition: {
                             x: {
                               repeat: Infinity,
-                              duration: 2.5,
+                              duration: 0.6, // reduced from 2.5
+                              delay: 0.2, // reduced from 1.7
                               ease: "easeInOut",
-                              delay: 1.7,
                             },
                           },
                         }
@@ -466,10 +466,10 @@ export function ToolsSection() {
                   : { opacity: 0, scale: 0 }
               }
               transition={{
-                opacity: { delay: 0.8, duration: 0.8 },
-                scale: { delay: 0.8, duration: 0.8 },
-                y: { repeat: Infinity, duration: 3, ease: "easeInOut" },
-                x: { repeat: Infinity, duration: 4, ease: "easeInOut", delay: 0.5 },
+                opacity: { delay: 0.18, duration: 0.22 }, // reduced from 0.8, 0.8
+                scale: { delay: 0.18, duration: 0.22 }, // reduced from 0.8, 0.8
+                y: { repeat: Infinity, duration: 1.2, ease: "easeInOut" }, // reduced from 3
+                x: { repeat: Infinity, duration: 1.6, ease: "easeInOut", delay: 0.12 } // reduced from 4, 0.5
               }}
               className="absolute top-[15%] left-[10%] w-8 h-8 rounded-full bg-blue-100"
             />
@@ -487,10 +487,10 @@ export function ToolsSection() {
                   : { opacity: 0, scale: 0 }
               }
               transition={{
-                opacity: { delay: 1, duration: 0.8 },
-                scale: { delay: 1, duration: 0.8 },
-                y: { repeat: Infinity, duration: 4, ease: "easeInOut", delay: 0.5 },
-                x: { repeat: Infinity, duration: 3.5, ease: "easeInOut" },
+                opacity: { delay: 0.22, duration: 0.22 }, // reduced from 1, 0.8
+                scale: { delay: 0.22, duration: 0.22 }, // reduced from 1, 0.8
+                y: { repeat: Infinity, duration: 1.6, ease: "easeInOut", delay: 0.12 }, // reduced from 4, 0.5
+                x: { repeat: Infinity, duration: 1.2, ease: "easeInOut" } // reduced from 3.5
               }}
               className="absolute bottom-[20%] right-[15%] w-6 h-6 rounded-full bg-green-200"
             />

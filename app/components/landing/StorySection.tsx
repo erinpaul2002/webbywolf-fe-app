@@ -19,10 +19,10 @@ export function StorySection() {
     visible: { 
       opacity: 1,
       transition: {
-        duration: 0.8,
+        duration: 0.32, // reduced from 0.8
         ease: "easeOut",
         when: "beforeChildren",
-        staggerChildren: 0.1
+        staggerChildren: 0.05 // reduced from 0.1
       }
     }
   };
@@ -35,7 +35,7 @@ export function StorySection() {
       transition: {
         type: "spring",
         stiffness: 70,
-        damping: 15
+        damping: 12 // snappier
       }
     }
   };
@@ -48,8 +48,8 @@ export function StorySection() {
       transition: {
         type: "spring",
         stiffness: 70,
-        damping: 15,
-        delay: 0.2
+        damping: 12, // snappier
+        delay: 0.08 // reduced from 0.2
       }
     }
   };
@@ -62,8 +62,8 @@ export function StorySection() {
       transition: {
         type: "spring",
         stiffness: 50,
-        damping: 15,
-        delay: 0.3
+        damping: 12,
+        delay: 0.12 // reduced from 0.3
       }
     }
   };
@@ -76,8 +76,8 @@ export function StorySection() {
       transition: {
         type: "spring",
         stiffness: 50,
-        damping: 15,
-        delay: 0.5
+        damping: 12,
+        delay: 0.18 // reduced from 0.5
       }
     },
     hover: { 
@@ -86,7 +86,7 @@ export function StorySection() {
       transition: {
         type: "spring",
         stiffness: 300,
-        damping: 20
+        damping: 16 // snappier
       }
     }
   };
@@ -96,7 +96,7 @@ export function StorySection() {
     visible: { 
       opacity: 1,
       transition: {
-        delay: 0.7
+        delay: 0.22 // reduced from 0.7
       }
     },
     hover: { 
@@ -105,7 +105,7 @@ export function StorySection() {
       transition: {
         type: "spring",
         stiffness: 400,
-        damping: 10
+        damping: 8 // snappier
       }
     }
   };
@@ -116,7 +116,7 @@ export function StorySection() {
       transition: {
         type: "spring",
         stiffness: 300,
-        damping: 10
+        damping: 8 // snappier
       }
     }
   };
@@ -129,28 +129,28 @@ export function StorySection() {
       transition: {
         type: "spring",
         stiffness: 300,
-        damping: 15,
-        delay: 0.8 + (custom * 0.05)
+        damping: 12, // snappier
+        delay: 0.18 + (custom * 0.02) // reduced from 0.8 + (custom * 0.05)
       }
     }),
     hover: { 
       scale: 1.2,
       transition: {
-        duration: 0.2
+        duration: 0.12 // reduced from 0.2
       }
     },
     active: {
       width: "48px",
       backgroundColor: "rgba(25,89,172,1)",
       transition: {
-        duration: 0.3
+        duration: 0.16 // reduced from 0.3
       }
     },
     inactive: {
       width: "12px",
       backgroundColor: "rgba(128,176,237,1)",
       transition: {
-        duration: 0.3
+        duration: 0.16 // reduced from 0.3
       }
     }
   };
@@ -162,8 +162,8 @@ export function StorySection() {
       opacity: 0.05, 
       scale: 1,
       transition: {
-        duration: 0.8,
-        delay: 0.7
+        duration: 0.28, // reduced from 0.8
+        delay: 0.18 // reduced from 0.7
       }
     }
   };
@@ -174,9 +174,9 @@ export function StorySection() {
     visible: { 
       width: "100%",
       transition: {
-        duration: 1.2,
+        duration: 0.32, // reduced from 1.2
         ease: "easeOut",
-        delay: 0.8
+        delay: 0.18 // reduced from 0.8
       }
     }
   };
@@ -231,14 +231,14 @@ export function StorySection() {
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ delay: 0.1, duration: 0.5 }}
+            transition={{ delay: 0.04, duration: 0.22 }} // reduced from 0.1, 0.5
           >
             Lorem ipsum{" "}
           </motion.span>
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
+            transition={{ delay: 0.09, duration: 0.22 }} // reduced from 0.3, 0.5
           >
             dolor sit amet
           </motion.span>
@@ -287,10 +287,10 @@ export function StorySection() {
               x: [0, 5, 0],
             } : { opacity: 0, scale: 0 }}
             transition={{ 
-              opacity: { delay: 0.8, duration: 0.8 },
-              scale: { delay: 0.8, duration: 0.8 },
-              y: { repeat: Infinity, duration: 3, ease: "easeInOut" },
-              x: { repeat: Infinity, duration: 4, ease: "easeInOut", delay: 0.5 }
+              opacity: { delay: 0.18, duration: 0.22 }, // reduced from 0.8, 0.8
+              scale: { delay: 0.18, duration: 0.22 }, // reduced from 0.8, 0.8
+              y: { repeat: Infinity, duration: 1.2, ease: "easeInOut" }, // reduced from 3
+              x: { repeat: Infinity, duration: 1.6, ease: "easeInOut", delay: 0.12 } // reduced from 4, 0.5
             }}
             className="absolute top-[15%] left-[10%] w-8 h-8 rounded-full bg-blue-100"
           />
@@ -304,10 +304,10 @@ export function StorySection() {
               x: [0, -5, 0],
             } : { opacity: 0, scale: 0 }}
             transition={{ 
-              opacity: { delay: 1, duration: 0.8 },
-              scale: { delay: 1, duration: 0.8 },
-              y: { repeat: Infinity, duration: 4, ease: "easeInOut", delay: 0.5 },
-              x: { repeat: Infinity, duration: 3.5, ease: "easeInOut" }
+              opacity: { delay: 0.22, duration: 0.22 }, // reduced from 1, 0.8
+              scale: { delay: 0.22, duration: 0.22 }, // reduced from 1, 0.8
+              y: { repeat: Infinity, duration: 1.6, ease: "easeInOut", delay: 0.12 }, // reduced from 4, 0.5
+              x: { repeat: Infinity, duration: 1.2, ease: "easeInOut" } // reduced from 3.5
             }}
             className="absolute bottom-[20%] right-[15%] w-6 h-6 rounded-full bg-blue-200"
           />
@@ -321,7 +321,7 @@ export function StorySection() {
             transition: {
               y: {
                 repeat: Infinity,
-                duration: 5,
+                duration: 1.8, // reduced from 5
                 ease: "easeInOut"
               }
             }
@@ -333,7 +333,7 @@ export function StorySection() {
               <motion.h3 
                 initial={{ opacity: 0, y: 15 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
-                transition={{ delay: 0.6, duration: 0.5 }}
+                transition={{ delay: 0.03, duration: 0.18 }} // reduced from 0.6, 0.5
                 className="text-slate-600 text-2xl font-semibold tracking-[1.44px] max-md:max-w-full"
               >
                 Artist & Investor
@@ -341,7 +341,7 @@ export function StorySection() {
               <motion.p 
                 initial={{ opacity: 0 }}
                 animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-                transition={{ delay: 0.7, duration: 0.5 }}
+                transition={{ delay: 0.07, duration: 0.18 }} // reduced from 0.7, 0.5
                 className="text-slate-900 self-stretch flex-1 shrink basis-[0%] w-full gap-2 text-lg font-normal leading-[25px] mt-4 max-md:max-w-full"
               >
                 Enim sagittis, sit porttitor morbi lobortis amet, libero
@@ -360,9 +360,9 @@ export function StorySection() {
                 transition: {
                   x: {
                     repeat: Infinity,
-                    duration: 2,
+                    duration: 0.8, // reduced from 2
                     ease: "easeInOut",
-                    delay: 1.5
+                    delay: 0.4 // reduced from 1.5
                   }
                 }
               } : {}}
@@ -378,9 +378,9 @@ export function StorySection() {
                   transition: {
                     x: {
                       repeat: Infinity,
-                      duration: 2,
+                      duration: 0.8, // reduced from 2
                       ease: "easeInOut",
-                      delay: 1.7
+                      delay: 0.5 // reduced from 1.7
                     }
                   }
                 } : {}}
@@ -401,7 +401,7 @@ export function StorySection() {
         className="self-center flex gap-2 mt-20 max-md:mt-10"
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ delay: 0.8, duration: 0.5 }}
+        transition={{ delay: 0.18, duration: 0.22 }} // reduced from 0.8, 0.5
       >
         {[0, 1, 2, 3, 4].map((index) => (
           <motion.div
@@ -438,9 +438,9 @@ export function StorySection() {
           width: "40%",
           x: [0, 10, 0],
           transition: {
-            width: { delay: 1.2, duration: 1 },
-            opacity: { delay: 1.2, duration: 0.8 },
-            x: { repeat: Infinity, duration: 5, ease: "easeInOut" }
+            width: { delay: 0.22, duration: 0.22 }, // reduced from 1.2, 1
+            opacity: { delay: 0.22, duration: 0.18 }, // reduced from 1.2, 0.8
+            x: { repeat: Infinity, duration: 1.8, ease: "easeInOut" } // reduced from 5
           }
         } : { opacity: 0, width: 0 }}
         className="absolute right-0 top-[30%] h-[1px] bg-gradient-to-l from-blue-500 to-transparent"

@@ -48,17 +48,17 @@ export function Testimonials() {
     }
   ];
 
-  // Animation variants
+  // Animation variants (reduced delays/durations)
   const sectionVariants: Variants = {
     hidden: { opacity: 0, y: 50 },
     visible: { 
       opacity: 1, 
       y: 0,
       transition: {
-        duration: 0.8,
+        duration: 0.3, // reduced from 0.8
         ease: "easeOut",
         when: "beforeChildren",
-        staggerChildren: 0.1
+        staggerChildren: 0.05 // reduced from 0.1
       }
     }
   };
@@ -85,7 +85,7 @@ export function Testimonials() {
         type: "spring",
         stiffness: 100,
         damping: 15,
-        delay: 0.4
+        delay: 0.09 // reduced from 0.4
       }
     },
     hover: { 
@@ -106,8 +106,8 @@ export function Testimonials() {
     visible: { 
       opacity: 1,
       transition: {
-        delay: 0.3,
-        staggerChildren: 0.2
+        delay: 0.08, // reduced from 0.3
+        staggerChildren: 0.07 // reduced from 0.2
       }
     }
   };
@@ -121,7 +121,7 @@ export function Testimonials() {
         type: "spring",
         stiffness: 70,
         damping: 15,
-        delay: 0.2 + (custom * 0.1)
+        delay: 0.07 + (custom * 0.02) // reduced
       }
     }),
     hover: {
@@ -144,13 +144,13 @@ export function Testimonials() {
         type: "spring",
         stiffness: 200,
         damping: 15,
-        delay: 0.3
+        delay: 0.09 // reduced from 0.3
       }
     },
     hover: {
       rotate: [0, -10, 10, -5, 0],
       transition: {
-        duration: 0.5
+        duration: 0.2 // reduced from 0.5
       }
     }
   };
@@ -164,7 +164,7 @@ export function Testimonials() {
         type: "spring",
         stiffness: 200,
         damping: 15,
-        delay: 0.6
+        delay: 0.12 // reduced from 0.6
       }
     },
     hover: { 
@@ -178,7 +178,7 @@ export function Testimonials() {
     },
     tap: { scale: 0.95 }
   };
-  
+
   // New decorative elements variants
   const decorationVariants: Variants = {
     hidden: { opacity: 0, scale: 0 },
@@ -186,8 +186,8 @@ export function Testimonials() {
       opacity: 0.1, 
       scale: 1,
       transition: {
-        duration: 0.8,
-        delay: 0.7
+        duration: 0.2, // reduced from 0.8
+        delay: 0.12 // reduced from 0.7
       }
     }
   };
@@ -198,9 +198,9 @@ export function Testimonials() {
     visible: { 
       width: "60%",
       transition: {
-        duration: 1.2,
+        duration: 0.2, // reduced from 1.2
         ease: "easeOut",
-        delay: 0.8
+        delay: 0.12 // reduced from 0.8
       }
     }
   };
@@ -290,14 +290,14 @@ export function Testimonials() {
           transition: {
             y: {
               repeat: Infinity,
-              duration: 6,
+              duration: 1.2, // reduced from 6
               ease: "easeInOut"
             },
             x: {
               repeat: Infinity,
-              duration: 7,
+              duration: 1.4, // reduced from 7
               ease: "easeInOut",
-              delay: 0.5
+              delay: 0.12 // reduced from 0.5
             }
           }
         } : {}}
@@ -312,13 +312,13 @@ export function Testimonials() {
           transition: {
             y: {
               repeat: Infinity,
-              duration: 5,
+              duration: 1, // reduced from 5
               ease: "easeInOut",
-              delay: 1
+              delay: 0.2 // reduced from 1
             },
             x: {
               repeat: Infinity,
-              duration: 6,
+              duration: 1.2, // reduced from 6
               ease: "easeInOut"
             }
           }
@@ -333,8 +333,8 @@ export function Testimonials() {
           opacity: 0.05, 
           width: "40%",
           transition: {
-            width: { delay: 1, duration: 1 },
-            opacity: { delay: 1, duration: 0.8 }
+            width: { delay: 0.2, duration: 0.2 }, // reduced
+            opacity: { delay: 0.2, duration: 0.2 } // reduced
           }
         } : { opacity: 0, width: 0 }}
         className="absolute left-0 top-[20%] h-[1px] bg-gradient-to-r from-white to-transparent"
@@ -346,8 +346,8 @@ export function Testimonials() {
           opacity: 0.05, 
           width: "30%",
           transition: {
-            width: { delay: 1.2, duration: 1 },
-            opacity: { delay: 1.2, duration: 0.8 }
+            width: { delay: 0.24, duration: 0.2 }, // reduced
+            opacity: { delay: 0.24, duration: 0.2 } // reduced
           }
         } : { opacity: 0, width: 0 }}
         className="absolute right-0 bottom-[30%] h-[1px] bg-gradient-to-l from-white to-transparent"
@@ -369,14 +369,14 @@ export function Testimonials() {
               <motion.span
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ delay: 0.3, duration: 0.5 }}
+                transition={{ delay: 0.09, duration: 0.15 }} // reduced
               >
                 Lorem ipsum{" "}
               </motion.span>
               <motion.span
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
+                transition={{ delay: 0.14, duration: 0.15 }} // reduced
               >
                 dolor sit amet
               </motion.span>
@@ -482,7 +482,7 @@ export function Testimonials() {
                 <motion.div 
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                  transition={{ delay: 0.6 + (index * 0.1), type: "spring", stiffness: 70, damping: 15 }}
+                  transition={{ delay: 0.18 + (index * 0.02), type: "spring", stiffness: 70, damping: 15 }} // reduced
                   className="mt-4 pt-4 flex w-full items-center gap-4 text-lg font-normal leading-[1.6] text-slate-900"
                 >
                   <motion.div 
@@ -493,9 +493,9 @@ export function Testimonials() {
                       transition: {
                         scale: {
                           repeat: Infinity,
-                          duration: 3,
+                          duration: 1, // reduced from 3
                           ease: "easeInOut",
-                          delay: 0.2 + (index * 0.3)
+                          delay: 0.04 + (index * 0.03) // reduced
                         }
                       }
                     } : {}}
@@ -532,9 +532,9 @@ export function Testimonials() {
             transition: {
               x: {
                 repeat: Infinity,
-                duration: 2,
+                duration: 0.5, // reduced
                 ease: "easeInOut",
-                delay: 1
+                delay: 0.04
               }
             }
           } : {}}
@@ -552,9 +552,9 @@ export function Testimonials() {
             transition: {
               x: {
                 repeat: Infinity,
-                duration: 2,
+                duration: 0.5, // reduced
                 ease: "easeInOut",
-                delay: 1.3
+                delay: 0.06
               }
             }
           } : {}}

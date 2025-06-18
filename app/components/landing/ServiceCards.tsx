@@ -24,15 +24,15 @@ export function ServiceCards() {
     { image: "/service-card-4.png", title: "Lorem ipsum dolor sit amet consectetur." }
   ];
 
-  // Animation variants
+  // Animation variants (reduced delays/durations)
   const sectionVariants: Variants = {
     hidden: { opacity: 0 },
     visible: { 
       opacity: 1,
       transition: {
-        duration: 0.8,
+        duration: 0.3, // reduced from 0.8
         when: "beforeChildren",
-        staggerChildren: 0.1
+        staggerChildren: 0.05 // reduced from 0.1
       }
     }
   };
@@ -46,8 +46,8 @@ export function ServiceCards() {
         type: "spring" as const,
         stiffness: 100,
         damping: 15,
-        delayChildren: 0.2,
-        staggerChildren: 0.1
+        delayChildren: 0.07, // reduced from 0.2
+        staggerChildren: 0.05 // reduced from 0.1
       }
     }
   };
@@ -58,7 +58,7 @@ export function ServiceCards() {
       opacity: 1, 
       y: 0,
       transition: {
-        duration: 0.6,
+        duration: 0.2, // reduced from 0.6
         ease: "easeOut"
       }
     }
@@ -69,8 +69,8 @@ export function ServiceCards() {
     visible: {
       opacity: 1,
       transition: {
-        delayChildren: 0.4,
-        staggerChildren: 0.2
+        delayChildren: 0.08, // reduced from 0.4
+        staggerChildren: 0.07 // reduced from 0.2
       }
     }
   };
@@ -93,7 +93,7 @@ export function ServiceCards() {
     visible: { 
       opacity: 1,
       transition: {
-        duration: 1.5,
+        duration: 0.5, // reduced from 1.5
         ease: "easeOut"
       }
     }
@@ -104,8 +104,8 @@ export function ServiceCards() {
     visible: { 
       opacity: 1,
       transition: {
-        delay: 0.3,
-        duration: 0.5
+        delay: 0.09, // reduced from 0.3
+        duration: 0.15 // reduced from 0.5
       }
     }
   };
@@ -115,8 +115,8 @@ export function ServiceCards() {
     visible: { 
       width: "100%",
       transition: {
-        delay: 0.6,
-        duration: 0.4
+        delay: 0.12, // reduced from 0.6
+        duration: 0.12 // reduced from 0.4
       }
     },
     hover: {
@@ -132,8 +132,8 @@ export function ServiceCards() {
       opacity: 0.05, 
       scale: 1,
       transition: {
-        duration: 0.8,
-        delay: 0.7
+        duration: 0.2, // reduced from 0.8
+        delay: 0.12 // reduced from 0.7
       }
     }
   };
@@ -155,12 +155,12 @@ export function ServiceCards() {
           transition: {
             opacity: {
               repeat: Infinity,
-              duration: 8,
+              duration: 2, // reduced from 8
               ease: "easeInOut"
             },
             scale: {
               repeat: Infinity,
-              duration: 12,
+              duration: 3, // reduced from 12
               ease: "easeInOut"
             }
           }
@@ -182,7 +182,7 @@ export function ServiceCards() {
           transition: {
             y: {
               repeat: Infinity,
-              duration: 6,
+              duration: 1.2, // reduced from 6
               ease: "easeInOut"
             }
           }
@@ -197,9 +197,9 @@ export function ServiceCards() {
           transition: {
             y: {
               repeat: Infinity,
-              duration: 5,
+              duration: 1, // reduced from 5
               ease: "easeInOut",
-              delay: 1
+              delay: 0.2 // reduced from 1
             }
           }
         } : {}}
@@ -428,8 +428,8 @@ export function ServiceCards() {
             opacity: 0.1, 
             width: "70%",
             transition: {
-              width: { delay: 1.2, duration: 1.5 },
-              opacity: { delay: 1.2, duration: 0.8 }
+              width: { delay: 0.2, duration: 0.2 }, // reduced
+              opacity: { delay: 0.2, duration: 0.2 } // reduced
             }
           }
         }}

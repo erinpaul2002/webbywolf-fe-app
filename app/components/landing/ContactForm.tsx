@@ -61,17 +61,17 @@ export function ContactForm() {
     }, 3000);
   };
 
-  // Animation variants
+  // Animation variants (reduced delays/durations)
   const formContainerVariants: Variants = {
     hidden: { opacity: 0, y: 50 },
     visible: { 
       opacity: 1, 
       y: 0,
       transition: {
-        duration: 0.8,
+        duration: 0.3, // reduced from 0.8
         ease: "easeOut",
         when: "beforeChildren",
-        staggerChildren: 0.1
+        staggerChildren: 0.05 // reduced from 0.1
       }
     }
   };
@@ -98,7 +98,7 @@ export function ContactForm() {
         type: "spring" as const,
         stiffness: 70,
         damping: 15,
-        staggerChildren: 0.07
+        staggerChildren: 0.03 // reduced from 0.07
       }
     }
   };
@@ -119,7 +119,7 @@ export function ContactForm() {
       boxShadow: "0px 0px 8px rgba(25, 89, 172, 0.3)",
       borderColor: "#1959AC",
       transition: {
-        duration: 0.2
+        duration: 0.12 // reduced from 0.2
       }
     }
   };
@@ -133,7 +133,7 @@ export function ContactForm() {
         type: "spring" as const,
         stiffness: 100,
         damping: 15,
-        delay: 0.3
+        delay: 0.09 // reduced from 0.3
       }
     },
     hover: { 
@@ -151,11 +151,11 @@ export function ContactForm() {
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
       variants={formContainerVariants}
-      className="w-full mt-[166px] flex flex-col items-center max-md:mt-10"
+      className="w-full mt-20 md:mt-[166px] flex flex-col items-center px-4 md:px-6"
     >
       <motion.h2 
         variants={headingVariants}
-        className="text-[42px] font-bold uppercase tracking-[-0.84px] text-[rgba(34,34,34,1)]"
+        className="text-2xl sm:text-3xl md:text-[42px] font-bold uppercase tracking-[-0.84px] text-[rgba(34,34,34,1)]"
       >
         REQUEST A QUOTE
       </motion.h2>
@@ -166,12 +166,12 @@ export function ContactForm() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
-            className="w-full max-w-[1108px] h-[400px] mt-[131px] flex flex-col items-center justify-center bg-green-50 rounded-lg"
+            className="w-full max-w-[1108px] min-h-[300px] md:h-[400px] mt-10 md:mt-[131px] flex flex-col items-center justify-center bg-green-50 rounded-lg p-4"
           >
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1, rotate: [0, 10, -10, 0] }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.2 }} // reduced from 0.5
               className="text-green-600 text-6xl mb-6"
             >
               ✓
@@ -179,7 +179,7 @@ export function ContactForm() {
             <motion.h3 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
+              transition={{ delay: 0.09 }} // reduced from 0.3
               className="text-2xl font-bold text-green-700 mb-4"
             >
               Thank You!
@@ -187,7 +187,7 @@ export function ContactForm() {
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
+              transition={{ delay: 0.12 }} // reduced from 0.5
               className="text-green-600 text-center max-w-md px-4"
             >
               We have received your request and will get back to you shortly.
@@ -197,14 +197,14 @@ export function ContactForm() {
           <motion.form 
             onSubmit={handleSubmit} 
             variants={formContainerVariants}
-            className="w-full max-w-[1108px] h-[806px] mt-[131px] flex flex-col items-center max-md:max-w-full max-md:mt-10"
+            className="w-full max-w-[1108px] mt-10 md:mt-[131px] flex flex-col items-center"
           >
-            <div className="w-full flex flex-col items-center text-sm max-md:max-w-full">
-              <motion.div variants={formRowVariants} className="w-full max-md:max-w-full">
-                <div className="flex flex-wrap gap-5 whitespace-nowrap text-[#0E0D0D] font-normal max-md:max-w-full">
+            <div className="w-full flex flex-col items-center text-sm">
+              <motion.div variants={formRowVariants} className="w-full">
+                <div className="flex flex-col md:flex-row md:flex-wrap gap-5 whitespace-nowrap text-[#0E0D0D] font-normal">
                   <motion.div 
                     variants={formRowVariants}
-                    className="w-[536px] min-w-60 flex flex-col items-stretch rounded-md max-md:max-w-full"
+                    className="w-full md:w-[calc(50%-10px)] flex flex-col items-stretch rounded-md"
                   >
                     <motion.label variants={inputVariants} htmlFor="name" className="text-[#0E0D0D]">Name</motion.label>
                     <motion.input
@@ -215,13 +215,13 @@ export function ContactForm() {
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
-                      className="h-[47px] mt-5 px-4 shrink-0 flex bg-[#F4F4F4] rounded-md border-[0.5px] border-solid border-[#9F9F9F] max-md:max-w-full focus:outline-none transition-all duration-200"
+                      className="h-[47px] mt-3 md:mt-5 px-4 shrink-0 flex bg-[#F4F4F4] rounded-md border-[0.5px] border-solid border-[#9F9F9F] focus:outline-none transition-all duration-200"
                       required
                     />
                   </motion.div>
                   <motion.div 
                     variants={formRowVariants}
-                    className="w-[536px] min-w-60 flex flex-col items-stretch rounded-md max-md:max-w-full"
+                    className="w-full md:w-[calc(50%-10px)] flex flex-col items-stretch rounded-md mt-5 md:mt-0"
                   >
                     <motion.label variants={inputVariants} htmlFor="email" className="text-[#0E0D0D]">E-mail</motion.label>
                     <motion.input
@@ -232,7 +232,7 @@ export function ContactForm() {
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      className="h-[47px] mt-5 px-4 shrink-0 flex bg-[#F4F4F4] rounded-md border-[0.5px] border-solid border-[#9F9F9F] max-md:max-w-full focus:outline-none transition-all duration-200"
+                      className="h-[47px] mt-3 md:mt-5 px-4 shrink-0 flex bg-[#F4F4F4] rounded-md border-[0.5px] border-solid border-[#9F9F9F] focus:outline-none transition-all duration-200"
                       required
                     />
                   </motion.div>
@@ -240,11 +240,11 @@ export function ContactForm() {
                 
                 <motion.div 
                   variants={formRowVariants}
-                  className="flex flex-wrap justify-center gap-5 mt-[37px] max-md:max-w-full"
+                  className="flex flex-col md:flex-row md:flex-wrap gap-5 mt-5 md:mt-[37px]"
                 >
                   <motion.div 
                     variants={formRowVariants}
-                    className="w-[536px] min-w-60 flex flex-col items-stretch rounded-md text-[#0E0D0D] font-normal max-md:max-w-full"
+                    className="w-full md:w-[calc(50%-10px)] flex flex-col items-stretch rounded-md text-[#0E0D0D] font-normal"
                   >
                     <motion.label variants={inputVariants} htmlFor="phone" className="text-[#0E0D0D]">Phone Number</motion.label>
                     <motion.input
@@ -255,24 +255,24 @@ export function ContactForm() {
                       name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      className="h-[47px] mt-[22px] px-4 shrink-0 flex bg-[#F4F4F4] rounded-md border-[0.5px] border-solid border-[#9F9F9F] max-md:max-w-full focus:outline-none transition-all duration-200"
+                      className="h-[47px] mt-3 md:mt-[22px] px-4 shrink-0 flex bg-[#F4F4F4] rounded-md border-[0.5px] border-solid border-[#9F9F9F] focus:outline-none transition-all duration-200"
                     />
                   </motion.div>
                   <motion.div 
                     variants={formRowVariants}
-                    className="w-[536px] min-w-60 max-md:max-w-full"
+                    className="w-full md:w-[calc(50%-10px)] mt-5 md:mt-0"
                   >
                     <motion.label variants={inputVariants} htmlFor="timeFrame" className="font-normal text-[#0e0d0d]">
                       Time Frame<span style={{color: 'rgba(255,0,0,1)'}}>*</span>
                     </motion.label>
-                    <motion.div variants={inputVariants} className="relative mt-[19px]">
+                    <motion.div variants={inputVariants} className="relative mt-3 md:mt-[19px]">
                       <motion.select
                         whileFocus="focus"
                         id="timeFrame"
                         name="timeFrame"
                         value={formData.timeFrame}
                         onChange={handleInputChange}
-                        className="w-full py-[11px] pl-4 pr-[3px] flex items-center overflow-hidden font-light text-[#707070] bg-[#F4F4F4] rounded-md border-[0.5px] border-solid border-[#9F9F9F] appearance-none max-md:max-w-full focus:outline-none transition-all duration-200"
+                        className="w-full py-[11px] pl-4 pr-[3px] flex items-center overflow-hidden font-light text-[#707070] bg-[#F4F4F4] rounded-md border-[0.5px] border-solid border-[#9F9F9F] appearance-none focus:outline-none transition-all duration-200"
                         required
                       >
                         <option value="">Choose Time Frame</option>
@@ -282,7 +282,7 @@ export function ContactForm() {
                       </motion.select>
                       <motion.div 
                         animate={{ rotate: formData.timeFrame ? 180 : 0 }}
-                        transition={{ duration: 0.3 }}
+                        transition={{ duration: 0.12 }} // reduced from 0.3
                         className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none"
                       >
                         <Image
@@ -299,23 +299,23 @@ export function ContactForm() {
                 
                 <motion.div 
                   variants={formRowVariants}
-                  className="flex flex-wrap justify-center gap-5 mt-[37px] max-md:max-w-full"
+                  className="flex flex-col md:flex-row md:flex-wrap gap-5 mt-5 md:mt-[37px]"
                 >
                   <motion.div 
                     variants={formRowVariants}
-                    className="w-[536px] min-w-60 max-md:max-w-full"
+                    className="w-full md:w-[calc(50%-10px)]"
                   >
                     <motion.label variants={inputVariants} htmlFor="size" className="font-normal text-[#0e0d0d]">
                       Size<span style={{color: 'rgba(255,0,0,1)'}}>*</span>
                     </motion.label>
-                    <motion.div variants={inputVariants} className="relative mt-[19px]">
+                    <motion.div variants={inputVariants} className="relative mt-3 md:mt-[19px]">
                       <motion.select
                         whileFocus="focus"
                         id="size"
                         name="size"
                         value={formData.size}
                         onChange={handleInputChange}
-                        className="w-full py-[11px] pl-4 pr-[3px] flex items-center overflow-hidden font-light text-[#707070] bg-[#F4F4F4] rounded-md border-[0.5px] border-solid border-[#9F9F9F] appearance-none max-md:max-w-full focus:outline-none transition-all duration-200"
+                        className="w-full py-[11px] pl-4 pr-[3px] flex items-center overflow-hidden font-light text-[#707070] bg-[#F4F4F4] rounded-md border-[0.5px] border-solid border-[#9F9F9F] appearance-none focus:outline-none transition-all duration-200"
                         required
                       >
                         <option value="">Choose Size</option>
@@ -325,7 +325,7 @@ export function ContactForm() {
                       </motion.select>
                       <motion.div 
                         animate={{ rotate: formData.size ? 180 : 0 }}
-                        transition={{ duration: 0.3 }}
+                        transition={{ duration: 0.12 }} // reduced from 0.3
                         className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none"
                       >
                         <Image
@@ -340,19 +340,19 @@ export function ContactForm() {
                   </motion.div>
                   <motion.div 
                     variants={formRowVariants}
-                    className="w-[536px] min-w-60 max-md:max-w-full"
+                    className="w-full md:w-[calc(50%-10px)] mt-5 md:mt-0"
                   >
                     <motion.label variants={inputVariants} htmlFor="quantity" className="font-normal text-[#0e0d0d]">
                       Quantity<span style={{color: 'rgba(255,0,0,1)'}}>*</span>
                     </motion.label>
-                    <motion.div variants={inputVariants} className="relative mt-[19px]">
+                    <motion.div variants={inputVariants} className="relative mt-3 md:mt-[19px]">
                       <motion.select
                         whileFocus="focus"
                         id="quantity"
                         name="quantity"
                         value={formData.quantity}
                         onChange={handleInputChange}
-                        className="w-full py-[11px] pl-4 pr-[3px] flex items-center overflow-hidden font-light text-[#707070] bg-[#F4F4F4] rounded-md border-[0.5px] border-solid border-[#9F9F9F] appearance-none max-md:max-w-full focus:outline-none transition-all duration-200"
+                        className="w-full py-[11px] pl-4 pr-[3px] flex items-center overflow-hidden font-light text-[#707070] bg-[#F4F4F4] rounded-md border-[0.5px] border-solid border-[#9F9F9F] appearance-none focus:outline-none transition-all duration-200"
                         required
                       >
                         <option value="">Choose Quantity</option>
@@ -362,7 +362,7 @@ export function ContactForm() {
                       </motion.select>
                       <motion.div 
                         animate={{ rotate: formData.quantity ? 180 : 0 }}
-                        transition={{ duration: 0.3 }}
+                        transition={{ duration: 0.12 }} // reduced from 0.3
                         className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none"
                       >
                         <Image
@@ -379,7 +379,7 @@ export function ContactForm() {
                 
                 <motion.div 
                   variants={formRowVariants}
-                  className="mt-[37px] max-md:max-w-full"
+                  className="mt-5 md:mt-[37px]"
                 >
                   <motion.label variants={inputVariants} htmlFor="description" className="font-normal text-[#0e0d0d]">
                     Please Describe Your Project<span style={{color: 'rgba(255,0,0,1)'}}>*</span>
@@ -392,7 +392,7 @@ export function ContactForm() {
                     value={formData.description}
                     onChange={handleInputChange}
                     placeholder="Choose a project type"
-                    className="w-full mt-[15px] px-3 pt-2.5 pb-[163px] text-[#707070] bg-[#F4F4F4] rounded-md border-[0.5px] border-solid border-[#9F9F9F] resize-none max-md:max-w-full max-md:pr-5 max-md:pb-[110px] focus:outline-none transition-all duration-200"
+                    className="w-full mt-3 md:mt-[15px] px-3 pt-2.5 h-40 md:h-[200px] text-[#707070] bg-[#F4F4F4] rounded-md border-[0.5px] border-solid border-[#9F9F9F] resize-none focus:outline-none transition-all duration-200"
                     required
                   />
                 </motion.div>
@@ -400,7 +400,7 @@ export function ContactForm() {
               
               <motion.p 
                 variants={inputVariants}
-                className="mt-10 text-lg font-medium leading-[60px] text-[rgba(60,60,60,1)] max-md:max-w-full"
+                className="mt-6 md:mt-10 text-base md:text-lg font-medium leading-normal md:leading-[60px] text-[rgba(60,60,60,1)] text-center md:text-left"
               >
                 <span style={{fontFamily: 'Inter, -apple-system, Roboto, Helvetica, sans-serif', fontWeight: 400}}>
                   By submitting this form you agree to our{" "}
@@ -436,7 +436,7 @@ export function ContactForm() {
                 whileHover="hover"
                 whileTap="tap"
                 type="submit"
-                className="mt-10 py-2.5 pl-6 pr-[23px] flex items-center justify-center gap-2.5 min-h-[38px] overflow-hidden text-[15px] font-bold text-white bg-[#1959AC] rounded-[5px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)] max-md:px-5"
+                className="mt-6 md:mt-10 py-2.5 px-6 flex items-center justify-center gap-2.5 min-h-[38px] overflow-hidden text-[15px] font-bold text-white bg-[#1959AC] rounded-[5px] shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)]"
               >
                 <span className="self-stretch my-auto">Loerum Ipsum</span>
                 <motion.div 

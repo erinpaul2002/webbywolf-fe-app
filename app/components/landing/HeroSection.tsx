@@ -116,10 +116,10 @@ export function HeroSection() {
       opacity: 1, 
       y: 0,
       transition: {
-        duration: 1,
+        duration: 0.32, // reduced from 1
         ease: "easeOut",
         when: "beforeChildren",
-        staggerChildren: 0.12
+        staggerChildren: 0.05 // reduced from 0.12
       }
     }
   };
@@ -132,8 +132,8 @@ export function HeroSection() {
       transition: {
         type: "spring",
         stiffness: 80,
-        damping: 20,
-        delay: 0.2
+        damping: 14, // snappier
+        delay: 0.06 // reduced from 0.2
       }
     },
     hover: {
@@ -141,7 +141,7 @@ export function HeroSection() {
       transition: {
         type: "spring",
         stiffness: 200,
-        damping: 20
+        damping: 12 // snappier
       }
     }
   };
@@ -154,8 +154,8 @@ export function HeroSection() {
       transition: {
         type: "spring",
         stiffness: 60,
-        damping: 20,
-        delay: 0.4
+        damping: 14, // snappier
+        delay: 0.13 // reduced from 0.4
       }
     }
   };
@@ -168,8 +168,8 @@ export function HeroSection() {
       transition: {
         type: "spring",
         stiffness: 60,
-        damping: 20,
-        delay: 0.6
+        damping: 14, // snappier
+        delay: 0.18 // reduced from 0.6
       }
     }
   };
@@ -182,8 +182,8 @@ export function HeroSection() {
       transition: {
         type: "spring",
         stiffness: 80,
-        damping: 20,
-        delay: 0.8
+        damping: 14, // snappier
+        delay: 0.22 // reduced from 0.8
       }
     },
     hover: { 
@@ -192,7 +192,7 @@ export function HeroSection() {
       transition: {
         type: "spring",
         stiffness: 200,
-        damping: 20
+        damping: 12 // snappier
       }
     },
     tap: { scale: 0.98 }
@@ -204,7 +204,7 @@ export function HeroSection() {
       transition: {
         type: "spring",
         stiffness: 200,
-        damping: 20
+        damping: 12 // snappier
       }
     }
   };
@@ -216,49 +216,59 @@ export function HeroSection() {
       opacity: 0.05, 
       scale: 1,
       transition: {
-        duration: 1.5,
-        delay: 1
+        duration: 0.32, // reduced from 1.5
+        delay: 0.18 // reduced from 1
       }
     }
   };
 
+  // Add detection for touch devices
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  
+  useEffect(() => {
+    // Check if device is touch-capable
+    setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
+  }, []);
+  
   return (
     <motion.section 
       ref={sectionRef}
       variants={sectionVariants}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
-      className="w-full flex justify-center items-center mt-40 max-md:mt-10 perspective-[1200px]"
+      className="w-full flex justify-center items-center mt-20 md:mt-40 px-4 perspective-[1200px]"
     >
       <motion.div 
         ref={cardRef}
         style={{
           scale: hoverScale,
-          rotateX: hovering ? rotateX : 0,
-          rotateY: hovering ? rotateY : 0,
+          rotateX: hovering && !isTouchDevice ? rotateX : 0,
+          rotateY: hovering && !isTouchDevice ? rotateY : 0,
           transformStyle: "preserve-3d",
           boxShadow: cardShadow,
           transition: "transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
           backgroundColor: "white",
         }}
-        onMouseEnter={() => setHovering(true)}
-        onMouseLeave={() => setHovering(false)}
-        className="flex flex-col items-center max-w-[736px] rounded-2xl p-8 relative transition-all duration-700"
+        onMouseEnter={() => !isTouchDevice && setHovering(true)}
+        onMouseLeave={() => !isTouchDevice && setHovering(false)}
+        className="flex flex-col items-center w-full max-w-[736px] rounded-2xl p-4 md:p-8 relative transition-all duration-700"
       >
-        {/* Matte gloss effect overlay - appears smoothly on hover */}
-        <motion.div 
-          className="absolute inset-0 rounded-2xl pointer-events-none z-[1]"
-          style={{
-            background: `radial-gradient(circle at ${glossX} ${glossY}, rgba(255,255,255,0.2) 0%, transparent 70%)`,
-            opacity: glossOpacity,
-            transition: "opacity 0.7s ease",
-          }}
-        />
+        {/* Gloss effect - only for non-touch devices */}
+        {!isTouchDevice && (
+          <motion.div 
+            className="absolute inset-0 rounded-2xl pointer-events-none z-[1]"
+            style={{
+              background: `radial-gradient(circle at ${glossX} ${glossY}, rgba(255,255,255,0.2) 0%, transparent 70%)`,
+              opacity: glossOpacity,
+              transition: "opacity 0.7s ease",
+            }}
+          />
+        )}
 
         <motion.div 
           variants={logoVariants}
           whileHover="hover"
-          className="self-center bg-[rgba(219,219,219,1)] min-h-[60px] w-[156px] max-w-full gap-2.5 overflow-hidden text-[32px] text-black font-extrabold whitespace-nowrap tracking-[-0.64px] px-[25px] max-md:px-5 transform-style-preserve-3d translate-z-10 cursor-pointer z-10"
+          className="self-center bg-[rgba(219,219,219,1)] min-h-[50px] md:min-h-[60px] w-[120px] md:w-[156px] max-w-full gap-2.5 overflow-hidden text-[24px] md:text-[32px] text-black font-extrabold whitespace-nowrap tracking-[-0.64px] px-[15px] md:px-[25px] transform-style-preserve-3d translate-z-10 cursor-pointer z-10"
           style={{ 
             transform: useTransform(hoverSpring, [0, 1], ["translateZ(0px)", "translateZ(40px)"]),
             transition: "transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275)"
@@ -267,11 +277,11 @@ export function HeroSection() {
           LOGO
         </motion.div>
         
-        <div className="flex w-full flex-col items-center font-bold mt-5 px-[74px] max-md:max-w-full max-md:px-5">
-          <div className="z-10 flex mb-[-34px] w-[520px] max-w-full flex-col items-center max-md:mb-2.5">
+        <div className="flex w-full flex-col items-center font-bold mt-5 px-4 md:px-[74px]">
+          <div className="z-10 flex mb-4 md:mb-[-34px] w-full max-w-[520px] flex-col items-center">
             <motion.h2 
               variants={titleVariants}
-              className="text-[rgba(34,34,34,1)] text-[42px] tracking-[-0.84px] text-center uppercase self-stretch max-md:max-w-full"
+              className="text-[rgba(34,34,34,1)] text-[28px] md:text-[42px] tracking-[-0.84px] text-center uppercase self-stretch"
               style={{ 
                 transform: useTransform(hoverSpring, [0, 1], ["translateZ(0px)", "translateZ(30px)"]),
                 transition: "transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275)"
@@ -283,7 +293,7 @@ export function HeroSection() {
                   visible: { 
                     opacity: 1, 
                     y: 0,
-                    transition: { delay: 0.5, duration: 0.7, ease: "easeOut" }
+                    transition: { delay: 0.08, duration: 0.22, ease: "easeOut" } // reduced from 0.5, 0.7
                   }
                 }}
               >
@@ -295,7 +305,7 @@ export function HeroSection() {
                   visible: { 
                     opacity: 1, 
                     y: 0,
-                    transition: { delay: 0.7, duration: 0.7, ease: "easeOut" }
+                    transition: { delay: 0.13, duration: 0.22, ease: "easeOut" } // reduced from 0.7, 0.7
                   }
                 }}
               >
@@ -305,7 +315,7 @@ export function HeroSection() {
             
             <motion.p 
               variants={descriptionVariants}
-              className="text-black text-center text-lg font-normal leading-[25px] mt-5 max-md:max-w-full"
+              className="text-black text-center text-base md:text-lg font-normal leading-[22px] md:leading-[25px] mt-4 md:mt-5"
               style={{ 
                 transform: useTransform(hoverSpring, [0, 1], ["translateZ(0px)", "translateZ(20px)"]),
                 transition: "transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275)"
@@ -319,7 +329,7 @@ export function HeroSection() {
               variants={buttonVariants}
               whileHover="hover"
               whileTap="tap"
-              className="justify-center items-center shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)] bg-[#1959AC] flex min-h-[38px] gap-2.5 overflow-hidden text-[15px] text-white mt-10 pl-6 pr-[23px] py-2.5 rounded-[5px] max-md:px-5"
+              className="justify-center items-center shadow-[0px_4px_20px_0px_rgba(0,0,0,0.15)] bg-[#1959AC] flex min-h-[38px] gap-2.5 overflow-hidden text-[15px] text-white mt-6 md:mt-10 pl-5 md:pl-6 pr-5 md:pr-[23px] py-2.5 rounded-[5px] w-full md:w-auto"
               style={{ 
                 transform: useTransform(hoverSpring, [0, 1], ["translateZ(0px)", "translateZ(50px)"]),
                 transition: "transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease"
@@ -341,33 +351,35 @@ export function HeroSection() {
           </div>        
         </div>
 
-        {/* Enhanced background elements with variants for smoother animations */}
+        {/* Adjusted background elements for mobile */}
         <motion.div
           variants={backgroundElementVariants}
           animate={isInView ? {
             opacity: [0.05, 0.07, 0.05],
             scale: [1, 1.05, 1],
             transition: {
-              opacity: { repeat: Infinity, duration: 5, ease: "easeInOut" },
-              scale: { repeat: Infinity, duration: 6, ease: "easeInOut" }
+              opacity: { repeat: Infinity, duration: 1.2, ease: "easeInOut" }, // reduced from 5
+              scale: { repeat: Infinity, duration: 1.6, ease: "easeInOut" } // reduced from 6
             }
           } : {}}
-          className="absolute top-[-150px] right-[-150px] w-[300px] h-[300px] rounded-full bg-blue-500 blur-3xl -z-10"
+          className="absolute top-[-100px] md:top-[-150px] right-[-80px] md:right-[-150px] w-[200px] md:w-[300px] h-[200px] md:h-[300px] rounded-full bg-blue-500 blur-3xl -z-10"
         />
+        
+        {/* Other background elements with similar responsive adjustments */}
         <motion.div
           variants={backgroundElementVariants}
           animate={isInView ? {
             opacity: [0.04, 0.06, 0.04],
             scale: [1, 1.1, 1],
             transition: {
-              opacity: { repeat: Infinity, duration: 6, ease: "easeInOut", delay: 0.5 },
-              scale: { repeat: Infinity, duration: 7, ease: "easeInOut", delay: 0.5 }
+              opacity: { repeat: Infinity, duration: 1.4, ease: "easeInOut", delay: 0.12 }, // reduced from 6, 0.5
+              scale: { repeat: Infinity, duration: 1.8, ease: "easeInOut", delay: 0.12 } // reduced from 7, 0.5
             }
           } : {}}
-          className="absolute bottom-[-100px] left-[-100px] w-[200px] h-[200px] rounded-full bg-indigo-500 blur-3xl -z-10"
+          className="absolute bottom-[-60px] md:bottom-[-100px] left-[-60px] md:left-[-100px] w-[150px] md:w-[200px] h-[150px] md:h-[200px] rounded-full bg-indigo-500 blur-3xl -z-10"
         />
         
-        {/* New decorative elements that appear on repeat */}
+        {/* Additional decorative elements with responsive positions */}
         <motion.div
           variants={{
             hidden: { opacity: 0, scale: 0 },
@@ -375,8 +387,8 @@ export function HeroSection() {
               opacity: 0.03, 
               scale: 1,
               transition: {
-                duration: 1.5,
-                delay: 1.3
+                duration: 0.32, // reduced from 1.5
+                delay: 0.22 // reduced from 1.3
               }
             }
           }}
@@ -385,12 +397,12 @@ export function HeroSection() {
             transition: {
               y: {
                 repeat: Infinity,
-                duration: 7,
+                duration: 2, // reduced from 7
                 ease: "easeInOut"
               }
             }
           } : {}}
-          className="absolute top-[20%] left-[-120px] w-[100px] h-[100px] rounded-full bg-green-300 blur-2xl -z-10"
+          className="absolute top-[20%] left-[-70px] md:left-[-120px] w-[70px] md:w-[100px] h-[70px] md:h-[100px] rounded-full bg-green-300 blur-2xl -z-10"
         />
         <motion.div
           variants={{
@@ -399,8 +411,8 @@ export function HeroSection() {
               opacity: 0.025, 
               scale: 1,
               transition: {
-                duration: 1.5,
-                delay: 1.5
+                duration: 0.32, // reduced from 1.5
+                delay: 0.24 // reduced from 1.5
               }
             }
           }}
@@ -409,13 +421,13 @@ export function HeroSection() {
             transition: {
               y: {
                 repeat: Infinity,
-                duration: 5,
+                duration: 1.4, // reduced from 5
                 ease: "easeInOut",
-                delay: 0.2
+                delay: 0.08 // reduced from 0.2
               }
             }
           } : {}}
-          className="absolute bottom-[20%] right-[-80px] w-[120px] h-[120px] rounded-full bg-purple-300 blur-2xl -z-10"
+          className="absolute bottom-[20%] right-[-50px] md:right-[-80px] w-[80px] md:w-[120px] h-[80px] md:h-[120px] rounded-full bg-purple-300 blur-2xl -z-10"
         />
       </motion.div>
     </motion.section>

@@ -12,16 +12,16 @@ export function PromoBanner() {
     margin: "0px 0px -50px 0px" // Start animation slightly before component comes into view
   });
 
-  // Animation variants
+  // Animation variants (reduced delays/durations)
   const sectionVariants: Variants = {
     hidden: { opacity: 0 },
     visible: { 
       opacity: 1,
       transition: {
-        duration: 0.8,
+        duration: 0.3, // reduced from 0.8
         ease: "easeOut",
-        when: "beforeChildren", // Ensure parent animates before children
-        staggerChildren: 0.1 // Stagger children animations
+        when: "beforeChildren",
+        staggerChildren: 0.05 // reduced from 0.1
       }
     }
   };
@@ -32,7 +32,7 @@ export function PromoBanner() {
       scale: 1,
       opacity: 1,
       transition: {
-        duration: 1.5,
+        duration: 0.5, // reduced from 1.5
         ease: "easeOut"
       }
     }
@@ -47,7 +47,7 @@ export function PromoBanner() {
         type: "spring",
         stiffness: 300,
         damping: 15,
-        delay: 0.2
+        delay: 0.07 // reduced from 0.2
       }
     }
   };
@@ -61,7 +61,7 @@ export function PromoBanner() {
         type: "spring",
         stiffness: 70,
         damping: 15,
-        delay: 0.4
+        delay: 0.12 // reduced from 0.4
       }
     }
   };
@@ -76,8 +76,8 @@ export function PromoBanner() {
       opacity: 1,
       y: 0,
       transition: {
-        delay: 0.4 + (custom * 0.05),
-        duration: 0.3
+        delay: 0.12 + (custom * 0.015), // reduced from 0.4 + (custom * 0.05)
+        duration: 0.12 // reduced from 0.3
       }
     })
   };
@@ -91,7 +91,7 @@ export function PromoBanner() {
         type: "spring",
         stiffness: 100,
         damping: 15,
-        delay: 1
+        delay: 0.18 // reduced from 1
       }
     },
     hover: {
@@ -172,12 +172,12 @@ export function PromoBanner() {
             transition: {
               opacity: {
                 repeat: Infinity,
-                duration: 8,
+                duration: 2, // reduced from 8
                 ease: "easeInOut"
               }
             }
           } : { opacity: 0 }}
-          transition={{ duration: 1.2 }}
+          transition={{ duration: 0.4 }} // reduced from 1.2
         />
       </motion.div>
       
@@ -237,13 +237,13 @@ export function PromoBanner() {
             height: `${particle.size}px`
           }}
           variants={particleVariants}
-          custom={{ delay: particle.delay, opacity: particle.opacity }}
+          custom={{ delay: particle.delay * 0.25, opacity: particle.opacity }} // reduce delay
           animate={isInView ? { 
             y: [0, -15, 0],
             opacity: [particle.opacity, particle.opacity * 1.5, particle.opacity],
             transition: { 
               repeat: Infinity,
-              duration: particle.duration,
+              duration: 1.2, // reduced from 3.5/4/3/4.5/3.2/4.2/3.7/3.8
               ease: "easeInOut"
             }
           } : {}}
@@ -256,7 +256,7 @@ export function PromoBanner() {
           hidden: { opacity: 0 },
           visible: { 
             opacity: 0.15,
-            transition: { delay: 0.5, duration: 1.2 }
+            transition: { delay: 0.12, duration: 0.2 } // reduced
           }
         }}
         animate={isInView ? {
@@ -264,20 +264,19 @@ export function PromoBanner() {
           transition: {
             opacity: {
               repeat: Infinity,
-              duration: 7,
+              duration: 1.2, // reduced from 7
               ease: "easeInOut"
             }
           }
         } : {}}
         className="absolute top-0 left-1/4 w-[2px] h-full bg-white transform -rotate-12 z-5"
       />
-      
       <motion.div
         variants={{
           hidden: { opacity: 0 },
           visible: { 
             opacity: 0.1,
-            transition: { delay: 0.8, duration: 1.2 }
+            transition: { delay: 0.18, duration: 0.2 } // reduced
           }
         }}
         animate={isInView ? {
@@ -285,23 +284,21 @@ export function PromoBanner() {
           transition: {
             opacity: {
               repeat: Infinity,
-              duration: 8,
+              duration: 1.2, // reduced from 8
               ease: "easeInOut",
-              delay: 1.5
+              delay: 0.3 // reduced from 1.5
             }
           }
         } : {}}
         className="absolute top-0 right-1/3 w-[3px] h-full bg-white transform rotate-15 z-5"
       />
-      
-      {/* Subtle light fog effect at the bottom */}
       <motion.div
         variants={{
           hidden: { opacity: 0, y: 20 },
           visible: { 
             opacity: 0.2,
             y: 0,
-            transition: { delay: 1.2, duration: 1.5 }
+            transition: { delay: 0.22, duration: 0.2 } // reduced
           }
         }}
         animate={isInView ? {
@@ -310,14 +307,14 @@ export function PromoBanner() {
           transition: {
             y: {
               repeat: Infinity,
-              duration: 10,
+              duration: 1.2, // reduced from 10
               ease: "easeInOut"
             },
             opacity: {
               repeat: Infinity,
-              duration: 8,
+              duration: 1.2, // reduced from 8
               ease: "easeInOut",
-              delay: 0.5
+              delay: 0.12 // reduced from 0.5
             }
           }
         } : {}}

@@ -28,16 +28,16 @@ export default function GallerySection() {
     margin: "0px 0px -50px 0px" // Start animation slightly before component comes into view
   });
 
-  // Animation variants
+  // Animation variants (reduced delays/durations)
   const sectionVariants: Variants = {
     hidden: { opacity: 0 },
     visible: { 
       opacity: 1,
       transition: {
-        duration: 0.8,
+        duration: 0.3, // reduced from 0.8
         ease: "easeOut",
-        when: "beforeChildren", // Make sure parent animates before children
-        staggerChildren: 0.1 // Stagger children animations
+        when: "beforeChildren",
+        staggerChildren: 0.05 // reduced from 0.1
       }
     }
   };
@@ -47,8 +47,8 @@ export default function GallerySection() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.3
+        staggerChildren: 0.05, // reduced from 0.15
+        delayChildren: 0.08 // reduced from 0.3
       }
     }
   };
@@ -75,7 +75,7 @@ export default function GallerySection() {
         type: "spring",
         stiffness: 100,
         damping: 15,
-        delay: 0.5
+        delay: 0.12 // reduced from 0.5
       }
     },
     hover: {
@@ -112,7 +112,7 @@ export default function GallerySection() {
         type: "spring",
         stiffness: 50,
         damping: 15,
-        delay: 0.2 + (custom * 0.2)
+        delay: 0.05 + (custom * 0.03) // reduced
       }
     })
   };
@@ -126,7 +126,7 @@ export default function GallerySection() {
         type: "spring",
         stiffness: 50,
         damping: 15,
-        delay: 0.4 + (custom * 0.15)
+        delay: 0.09 + (custom * 0.02) // reduced
       }
     })
   };
@@ -140,7 +140,7 @@ export default function GallerySection() {
         type: "spring",
         stiffness: 50,
         damping: 15,
-        delay: 0.2 + (custom * 0.1)
+        delay: 0.03 + (custom * 0.01) // reduced
       }
     })
   };
@@ -152,8 +152,8 @@ export default function GallerySection() {
       opacity: 0.2, 
       scale: 1,
       transition: {
-        duration: 0.8,
-        delay: 0.6
+        duration: 0.2, // reduced from 0.8
+        delay: 0.09 // reduced from 0.6
       }
     }
   };
@@ -164,7 +164,7 @@ export default function GallerySection() {
       variants={sectionVariants}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
-      className="relative mt-20 overflow-hidden bg-slate-100 pt-20 px-4 md:px-10 lg:px-20"
+      className="relative mt-10 md:mt-20 overflow-hidden bg-slate-100 pt-10 md:pt-20 px-4 md:px-10 lg:px-20"
     >
       {/* Decorative elements with continuous animations when in view */}
       <motion.div
@@ -174,7 +174,7 @@ export default function GallerySection() {
           transition: {
             y: {
               repeat: Infinity,
-              duration: 6,
+              duration: 1.2, // reduced from 6
               ease: "easeInOut"
             }
           }
@@ -188,32 +188,115 @@ export default function GallerySection() {
           transition: {
             y: {
               repeat: Infinity,
-              duration: 8,
+              duration: 1, // reduced from 8
               ease: "easeInOut",
-              delay: 1
+              delay: 0.2 // reduced from 1
             }
           }
         } : {}}
         className="absolute bottom-60 left-20 w-48 h-48 rounded-full bg-blue-300 opacity-5 blur-xl -z-10"
       />
 
-      <div className="mx-auto grid max-w-[1400px] grid-cols-2 gap-8">
+      {/* MOBILE VERSION */}
+      <div className="mx-auto md:hidden max-w-[1400px]">
+        {/* Text section */}
+        <motion.div 
+          variants={textContainerVariants}
+          className="mb-8 flex flex-col justify-center gap-4"
+        >
+          <motion.p 
+            variants={textItemVariants}
+            className="text-lg font-semibold tracking-[1.6px] text-slate-600"
+          >
+            NO LIMITS
+          </motion.p>
+          <motion.h1 
+            variants={textItemVariants}
+            className="text-3xl font-bold uppercase tracking-[-0.84px] text-slate-900"
+          >
+            LOREM IPSUM DOLOR SIT AMET
+          </motion.h1>
+          <motion.p 
+            variants={textItemVariants}
+            className="text-base font-normal leading-[25px] text-black"
+          >
+            Lorem ipsum dolor sit amet consectetur. Nisl faucibus vitae porttitor pharetra tempor quis arcu. Ipsum nullam.
+          </motion.p>
+          <motion.button 
+            variants={buttonVariants}
+            whileHover="hover"
+            whileTap="tap"
+            className="mt-4 flex w-fit items-center gap-2 rounded-md bg-[#1959AC] py-3 px-6 font-bold text-white shadow-lg"
+          >
+            <span>Loerum Ipsum</span>
+            <motion.svg 
+              variants={arrowVariants}
+              width="17" 
+              height="14" 
+              viewBox="0 0 17 14" 
+              fill="none" 
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M10.5 1L16 7M16 7L10.5 13M16 7H1" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </motion.svg>
+          </motion.button>
+        </motion.div>
+        
+        {/* Mobile images grid */}
+        <div className="grid grid-cols-2 gap-3">
+          {[...leftImages, ...rightImages].slice(0, 6).map((img, index) => (
+            <motion.div 
+              key={index} 
+              variants={mobileImageVariants}
+              custom={index}
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300, damping: 10 }}
+              className={`${index === 0 || index === 3 ? 'col-span-2' : 'col-span-1'} aspect-square overflow-hidden rounded-lg`}
+            >
+              <motion.div 
+                className="relative h-full w-full"
+                animate={isInView ? {
+                  y: [0, index % 2 === 0 ? -2 : -3, 0], // reduced from -5/-8
+                  transition: {
+                    y: {
+                      repeat: Infinity,
+                      duration: 3, // increased from 1
+                      ease: "easeInOut",
+                      delay: 0.04 // keep as is
+                    }
+                  }
+                } : {}}
+              >
+                <Image
+                  src={img}
+                  fill
+                  className="object-cover"
+                  alt={`Gallery image ${index + 1}`}
+                />
+              </motion.div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* DESKTOP VERSION */}
+      <div className="mx-auto hidden md:grid max-w-[1400px] grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
         {/* Left side - 4×6 grid */}
-        <div className="grid h-[800px] grid-cols-8 grid-rows-12 gap-4">
+        <div className="grid h-[500px] md:h-[600px] lg:h-[800px] grid-cols-8 grid-rows-12 gap-4">
           {/* Text section - top left (3×3) */}
           <motion.div 
-            className="col-span-6 row-span-6 z-10 flex flex-col justify-center gap-6"
+            className="col-span-6 row-span-6 z-10 flex flex-col justify-center gap-4 md:gap-6"
             variants={textContainerVariants}
           >
             <motion.p 
               variants={textItemVariants}
-              className="text-xl font-semibold tracking-[1.6px] text-slate-600"
+              className="text-lg md:text-xl font-semibold tracking-[1.6px] text-slate-600"
             >
               NO LIMITS
             </motion.p>
             <motion.h1 
               variants={textItemVariants}
-              className="text-4xl font-bold uppercase tracking-[-0.84px] text-slate-900 md:text-[42px]"
+              className="text-3xl md:text-4xl font-bold uppercase tracking-[-0.84px] text-slate-900 lg:text-[42px]"
             >
               <motion.span
                 variants={{
@@ -221,7 +304,7 @@ export default function GallerySection() {
                   visible: { 
                     opacity: 1, 
                     y: 0,
-                    transition: { delay: 0.4, duration: 0.5 }
+                    transition: { delay: 0.09, duration: 0.15 } // reduced
                   }
                 }}
               >
@@ -233,7 +316,7 @@ export default function GallerySection() {
                   visible: { 
                     opacity: 1, 
                     y: 0,
-                    transition: { delay: 0.6, duration: 0.5 }
+                    transition: { delay: 0.14, duration: 0.15 } // reduced
                   }
                 }}
               >
@@ -242,7 +325,7 @@ export default function GallerySection() {
             </motion.h1>
             <motion.p 
               variants={textItemVariants}
-              className="text-lg font-normal leading-[25px] text-black"
+              className="text-base md:text-lg font-normal leading-[25px] text-black"
             >
               Lorem ipsum dolor sit amet consectetur. Nisl faucibus vitae porttitor pharetra tempor quis arcu. Ipsum nullam.
             </motion.p>
@@ -277,11 +360,11 @@ export default function GallerySection() {
             <motion.div 
               className="relative h-[150%] w-full"
               animate={isInView ? {
-                y: [0, -5, 0],
+                y: [0, -3, 0], // reduced from -5
                 transition: {
                   y: {
                     repeat: Infinity,
-                    duration: 3,
+                    duration: 3, // increased from 1
                     ease: "easeInOut"
                   }
                 }
@@ -307,11 +390,11 @@ export default function GallerySection() {
             <motion.div 
               className="relative h-[170%] w-full"
               animate={isInView ? {
-                y: [0, -8, 0],
+                y: [0, -5, 0], // reduced from -8
                 transition: {
                   y: {
                     repeat: Infinity,
-                    duration: 4,
+                    duration: 3.5, // increased from 1
                     ease: "easeInOut",
                     delay: 0.5
                   }
@@ -338,11 +421,11 @@ export default function GallerySection() {
             <motion.div 
               className="relative h-full w-full"
               animate={isInView ? {
-                y: [0, -6, 0],
+                y: [0, -2, 0], // reduced from -6
                 transition: {
                   y: {
                     repeat: Infinity,
-                    duration: 3.5,
+                    duration: 3, // increased from 1
                     ease: "easeInOut",
                     delay: 0.2
                   }
@@ -372,11 +455,11 @@ export default function GallerySection() {
             <motion.div 
               className="relative h-full w-full"
               animate={isInView ? {
-                y: [0, -5, 0],
+                y: [0, -2, 0], // reduced from -5
                 transition: {
                   y: {
                     repeat: Infinity,
-                    duration: 3,
+                    duration: 3, // increased from 1
                     ease: "easeInOut",
                     delay: 0.7
                   }
@@ -403,11 +486,11 @@ export default function GallerySection() {
             <motion.div 
               className="relative h-full w-full"
               animate={isInView ? {
-                y: [0, -7, 0],
+                y: [0, -3, 0], // reduced from -7
                 transition: {
                   y: {
                     repeat: Infinity,
-                    duration: 4,
+                    duration: 3.5, // increased from 1
                     ease: "easeInOut",
                     delay: 0.3
                   }
@@ -434,11 +517,11 @@ export default function GallerySection() {
             <motion.div 
               className="relative h-full w-full"
               animate={isInView ? {
-                y: [0, -4, 0],
+                y: [0, -2, 0], // reduced from -4
                 transition: {
                   y: {
                     repeat: Infinity,
-                    duration: 3.5,
+                    duration: 3.2, // increased from 1
                     ease: "easeInOut",
                     delay: 0.9
                   }
@@ -465,11 +548,11 @@ export default function GallerySection() {
             <motion.div 
               className="relative h-[300%] w-full"
               animate={isInView ? {
-                y: [0, -3, 0],
+                y: [0, -1, 0], // reduced from -3
                 transition: {
                   y: {
                     repeat: Infinity,
-                    duration: 2.5,
+                    duration: 2.5, // increased from 1
                     ease: "easeInOut",
                     delay: 0.5
                   }
@@ -496,11 +579,11 @@ export default function GallerySection() {
             <motion.div 
               className="relative h-[200%] w-full"
               animate={isInView ? {
-                y: [0, -6, 0],
+                y: [0, -2, 0], // reduced from -6
                 transition: {
                   y: {
                     repeat: Infinity,
-                    duration: 3.2,
+                    duration: 3, // increased from 1
                     ease: "easeInOut",
                     delay: 0.4
                   }
@@ -515,86 +598,6 @@ export default function GallerySection() {
               />
             </motion.div>
           </motion.div>
-        </div>
-
-        {/* Mobile display - simplified column */}
-        <div className="md:hidden col-span-4 mt-8 grid grid-cols-2 gap-4">
-          {/* Text section */}
-          <motion.div 
-            variants={textContainerVariants}
-            className="flex flex-col justify-center gap-6"
-          >
-            <motion.p 
-              variants={textItemVariants}
-              className="text-xl font-semibold tracking-[1.6px] text-slate-600"
-            >
-              NO LIMITS
-            </motion.p>
-            <motion.h1 
-              variants={textItemVariants}
-              className="text-4xl font-bold uppercase tracking-[-0.84px] text-slate-900"
-            >
-              LOREM IPSUM DOLOR SIT AMET
-            </motion.h1>
-            <motion.p 
-              variants={textItemVariants}
-              className="text-lg font-normal leading-[25px] text-black"
-            >
-              Lorem ipsum dolor sit amet consectetur. Nisl faucibus vitae porttitor pharetra tempor quis arcu. Ipsum nullam.
-            </motion.p>
-            <motion.button 
-              variants={buttonVariants}
-              whileHover="hover"
-              whileTap="tap"
-              className="mt-4 flex w-fit items-center gap-2 rounded-md bg-[#1959AC] py-3 px-6 font-bold text-white shadow-lg"
-            >
-              <span>Loerum Ipsum</span>
-              <motion.svg 
-                variants={arrowVariants}
-                width="17" 
-                height="14" 
-                viewBox="0 0 17 14" 
-                fill="none" 
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M10.5 1L16 7M16 7L10.5 13M16 7H1" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </motion.svg>
-            </motion.button>
-          </motion.div>
-          
-          {/* Images stacked */}
-          {[...leftImages, ...rightImages].map((img, index) => (
-            <motion.div 
-              key={index} 
-              variants={mobileImageVariants}
-              custom={index}
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 300, damping: 10 }}
-              className="h-[200px] overflow-hidden rounded-lg"
-            >
-              <motion.div 
-                className="relative h-full w-full"
-                animate={isInView ? {
-                  y: [0, index % 2 === 0 ? -5 : -8, 0],
-                  transition: {
-                    y: {
-                      repeat: Infinity,
-                      duration: 3 + (index * 0.3),
-                      ease: "easeInOut",
-                      delay: 0.2 * index
-                    }
-                  }
-                } : {}}
-              >
-                <Image
-                  src={img}
-                  fill
-                  className="object-cover"
-                  alt={`Gallery image ${index + 1}`}
-                />
-              </motion.div>
-            </motion.div>
-          ))}
         </div>
       </div>
     </motion.section>

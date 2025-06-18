@@ -20,14 +20,13 @@ import { FeatureShowcase } from './components/landing/FeatureShowcase';
 import { AdjustableBackground } from './components/ui/AdjustableBackground';
 
 
+
 export default function Home() {
   return (
     <div className="bg-white flex flex-col overflow-hidden items-stretch">
       <Header />
-      
       <main>
-        <Hero />
-        
+          <Hero />
         <div className="relative">
           <AdjustableBackground
             imagePath="/line-5.svg"
@@ -41,18 +40,15 @@ export default function Home() {
             zIndex={0}
           />
           <div className="relative z-10">
-            <Features />
-            <Services />
-            <Banner />
+              <Features />
+              <Services />
+              <Banner />
           </div>
         </div>
-        
-        <Showcase />
-        <ServiceCards />
-        <PromoBanner />
-        <ContactForm />
-
-        
+          <Showcase />
+          <ServiceCards />
+          <PromoBanner />
+          <ContactForm />
         {/* Container for Gallery and FeatureShowcase with shared background */}
         <div className="relative">
           {/* Background positioned behind both sections */}
@@ -66,24 +62,20 @@ export default function Home() {
             scale={1.2}
             zIndex={0}
           />
-          
           {/* Content sections with higher z-index */}
           <div className="relative z-10">
-            <PartnershipSection />
-            <GallerySection />
-            <FeatureShowcase />
-            <Testimonials />
+              <PartnershipSection />
+              <GallerySection />
+              <FeatureShowcase />
+              <Testimonials />
           </div>
         </div>
-        
-
-        <ToolsSection />
-        <ContentWithCardSection />
-        <StorySection />
-        <FAQ />
-        <HeroSection />
-      </main>
-      
+          <ToolsSection />
+          <ContentWithCardSection />
+          <StorySection />
+          <FAQ />
+          <HeroSection />
+      </main>  
       <Footer />
     </div>
   );
