@@ -3,7 +3,6 @@
 import { useState, useRef } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence, Variants, useInView } from 'framer-motion';
-import { ChevronDown } from "lucide-react";
 
 interface FAQItem {
   question: string;
@@ -99,19 +98,6 @@ export function FAQ() {
     }),
     hover: {
       backgroundColor: "rgba(248, 250, 252, 0.8)"
-    }
-  };
-
-  const iconVariants: Variants = {
-    open: { 
-      rotate: 180,
-      scale: 1.1,
-      transition: { duration: 0.18 } // reduced from 0.4
-    },
-    closed: { 
-      rotate: 0,
-      scale: 1,
-      transition: { duration: 0.18 } // reduced from 0.4
     }
   };
 
